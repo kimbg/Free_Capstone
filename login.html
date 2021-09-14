@@ -18,17 +18,19 @@
        }
        #login 
        {
+           z-index: 1;
            position : absolute; top : 50%; left : 50%;
            background: white;
            display: flex;
-           justify-content: center;
+           justify-content : center;
            flex-direction: column;
+           border-radius: 5px;
 
            width : 400px; height : 500px;
            margin : -250px 0 0 -200px;
+           transition : 2s;
        }      
        #login #photo {
-           margin-top : 35px;
            margin-bottom : 10px;
        }
        #login > input {
@@ -55,6 +57,7 @@
            margin : 0 auto;
            border : none;
            border-radius: 3px;
+           margin-bottom: 5px;
        }
        #row_2 {
            justify-content: space-around;
@@ -65,21 +68,58 @@
            color : black;
        }
     </style>
+    
+    <!--회원가입-->
+    <style>
+        #join_window {
+            position : absolute;
+            z-index: 0;
+            width : 400px; height : 500px;
+
+
+            top : 50%; left : 50%;
+            margin : -250px 0 0 -200px;
+            background: white;
+                        
+            transition: 2s;
+        }
+        
+    </style>   
 </head>
 <body>
     <div id = "login">
-        <div id = "photo" class = "center"><img src = "http://placehold.it/200x200"></div>
+        <div id = "photo" class = "center"><img src = "http://placehold.it/150x150"></div>
         <input type = "text" placeholder="사용자 아이디" required/>
         <input type = "text" placeholder="비밀번호" required/>
         <div id = "row_1" class = "row">
-            <input type = "checkbox" id = "chkbtn"/><span>로그인 상태유지</span>
+            <input type = "checkbox" id = "chkbtn"/><label for = "chkbtn">로그인 상태유지</span>
         </div>
-        <button type = "submit"  id = "loginbt">로그인</button>
+        <button type = "submit"  id = "loginbt" onclick = "btn();">로그인</button>
         <div id = "row_2" class ="row">
-            <a href = "#">회원가입</a>
+            <a href = "#" onclick = "join();">회원가입</a>
             <a href = "#">계정찾기</a>
             <a href = "#">비밀번호 찾기</a>
         </div>
     </div>
+    <div id = "join_window">
+        회원가입창
+    </div>
+
+    <script type = "text/javascript">
+        function join() {
+            document.getElementById("login").style.marginLeft = "-300px";
+            document.getElementById("join_window").style.marginLeft = "150px";            
+        }
+        
+        var loginbtn = document.getElementById("loginbt");
+        loginbtn.onmouseover = function() {
+            loginbtn.style.fontWeight = "bold";
+            loginbtn.style.fontSize = "1.1em";
+        }
+        loginbtn.onmouseout = function() {
+            loginbtn.style.fontWeight = "normal";
+            loginbtn.style.fontSize = "1em";
+        }
+    </script>
 </body>
 </html>
