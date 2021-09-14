@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        * {text-decoration: none;}
+       html {height : 100%;}
+       body {position:relative; width : 100%; height : 100%; background: rgb(224, 224, 224);}
+       .center {
+           text-align: center;
+       }
+       .row {
+           flex-direction: row;
+           display: flex;
+       }
+       #login 
+       {
+           position : absolute; top : 50%; left : 50%;
+           background: white;
+           display: flex;
+           justify-content: center;
+           flex-direction: column;
+
+           width : 400px; height : 500px;
+           margin : -250px 0 0 -200px;
+       }      
+       #login #photo {
+           margin-top : 35px;
+           margin-bottom : 10px;
+       }
+       #login > input {
+           width : 75%;
+           height : 35px;
+           margin : 0 auto;
+           margin-top : 5px;
+           background: rgb(233, 233, 233);
+           border : none;
+           border-radius: 3px;
+       }
+       #row_1 {
+           margin-top : 10px;
+           margin-bottom: 10px;
+       }
+       #row_1 > input {
+        margin-left : 12.5%
+       }
+       #loginbt {
+           color : white;
+           background: rgb(250, 122, 128);
+           width : 75%;
+           height : 35px;
+           margin : 0 auto;
+           border : none;
+           border-radius: 3px;
+       }
+       #row_2 {
+           justify-content: space-around;
+           width : 75%;
+           margin-left : 12.5%
+       }
+       #row_2 a {
+           color : black;
+       }
+    </style>
+</head>
+<body>
+    <div id = "login">
+        <div id = "photo" class = "center"><img src = "http://placehold.it/200x200"></div>
+        <input type = "text" placeholder="사용자 아이디" required/>
+        <input type = "text" placeholder="비밀번호" required/>
+        <div id = "row_1" class = "row">
+            <input type = "checkbox" id = "chkbtn"/><span>로그인 상태유지</span>
+        </div>
+        <button type = "submit"  id = "loginbt">로그인</button>
+        <div id = "row_2" class ="row">
+            <a href = "#">회원가입</a>
+            <a href = "#">계정찾기</a>
+            <a href = "#">비밀번호 찾기</a>
+        </div>
+    </div>
+</body>
+</html>
