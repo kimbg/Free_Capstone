@@ -2,13 +2,8 @@
 
 <head>
 	<style>
-		body {
-			background: gray;
-		}
-
-		h1 {
-			margin-right: 10px;
-		}
+		body {background: rgb(170,170,170);}
+		h1 {margin-right: 10px;}
 		button {text-decoration: none; border : none;}
 		header {
 			background: white;
@@ -22,28 +17,17 @@
 			align-items: center;
 			border-bottom: 1px solid black;
 		}
-
 		header form {
 			margin-top: 15px;
 			margin-right: 10px;
 		}
-
 		header form input {
 			height: 30px;
 			border-radius: 5px;
 		}
-
-		a {
-			text-decoration: none;
-		}
-
-		nav {
-			margin-left: 40px;
-		}
-
-		#togglebtn {
-			display: none;
-		}
+		a {text-decoration: none;}
+		nav {margin-left: 40px;	}
+		#togglebtn {display: none;}
 	</style>
 	<!--메인-->
 	<style>
@@ -114,9 +98,7 @@
             border-radius: 5px;
         }
         h4 {margin : 3px;}
-		.forDlg {
-			display: none;
-		}
+		.forDlg {display: none;}
 	</style>
 	<script src="jquery/jquery-3.6.0.min.js"></script>
 </head>
@@ -172,9 +154,8 @@
 			<div>another Content</div>
 		</div>
 	</main>
-
+	
 	<script type="text/javascript">
-
 		var dlg = document.getElementById("myDlg");
 		function closeDlg()  //Dlg닫는 함수
 		{
@@ -183,12 +164,14 @@
 		}
 
 		/*스크롤시 추가내용 불러오기*/ //백엔드 분들 이값을 DB에서 불러와서 바꿔주세요 ㅋㅋ 수고링~
+		
 		var addItem = '<h1>Title</h1>'; //추가되는 내용 기본값.
 		addItem += '<img src = "http://placehold.it/500x400" class = "main_photo">';
 		addItem += '<div class = "content_end">';
 		addItem += '<div>content</div>';
 		addItem += '<button type = "button" class = "contentbt"><img src = "http://placehold.it/45x45"></button>';
 		addItem += '</div>';
+		//이 위까지는 기본적인 게시글 사진, 글 이고 아래부터는 Dlg를 위해 추가되는 내용 잘모르겠으면 위 html 주석 참조
 		addItem += '<div class = "forDlg">';
 		addItem += '<dialog id = "myDlg">';
 		addItem += '<a href = "#" onclick = "closeDlg()" id = "closebtn">X</a> ';
@@ -201,18 +184,13 @@
 		addItem += '<h4>인제대학교</h4>';
 		addItem += '</div> </div> </dialog> </div>';		
 
-
 		//동적으로 생성된 버튼에도 이벤트 부여 이 이벤트를 통해 Dlg를 띄울것
 		$(document).on('click','.contentbt',function() {
 			$(".forDlg").css("display","block");
 			dlg.showModal();
 		});
 
-		$(function() {
-
-			
-			
-
+		$(function() {						
 			$('#wrap').scroll(function(){
         		var scrollT = $(this).scrollTop(); //스크롤바의 상단위치
         		var scrollH = $(this).height(); //스크롤바를 갖는 div의 높이
@@ -220,13 +198,10 @@
         		if(scrollT + scrollH +1 >= contentH) // 스크롤바가 아래 쪽에 위치할 때
 				{ 
          		   $('#content_bar').append(addItem);
-       	 		}
+       	 		}				
     		});
-
-
 		});
 	//여기까지 추가내용 불러오기
-
 	</script>
 </body>
 
