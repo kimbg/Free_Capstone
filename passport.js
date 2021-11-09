@@ -21,14 +21,15 @@ module.exports = function (app) {
             conn.query('select * from users where id = ?',[user.id],(err,result)=> {
                 if(err) {
                     console.log('execute err1');                    
-                    return 0;
+                    return done(err);
                 }
                 if(!result[0]) { //얘는 결과가 없다는 소리
-                    conn.query(`insert into users values (?,?)`,[user.id,user.pw],(err,result)=> {
+                    conn.query(`insert into users values (?,?)`,[user.id,user.pw],(err,result2)=> {
                         if(err) {
                             console.log('execute err1-1');
                             console.log(err);
                             console.log('!result[0] in data user.id : ',user.id);
+                            return done(err);
                         }
                         return done(null,user);
                     })
@@ -137,7 +138,10 @@ module.exports = function (app) {
         }),
         (req,res)=> { //성공할경우 
             console.log("part 4");
-            res.send("구글로 로그인 성공!");
+            req.session.save(()=> {
+                console.log("구글 로그인 성공!");
+                res.redirect('/');
+            })
     });
 
 
@@ -149,8 +153,10 @@ module.exports = function (app) {
         console.log('kakaoStrategy');
         console.log(profile);
         var user = {
-            id : profile.displayName
+            id : profile.displayName,
+            pw : profile._json.kakao_account.email,
         }
+        console.log('kakao user data : ',user);
         done(null,user);
     }
     ))
@@ -161,7 +167,8 @@ module.exports = function (app) {
     }), 
     (req,res) => {
         req.session.save(() => {
-            res.send("카카오 로그인 성공");
+            console.log("카카오 로그인 성공!");
+            res.redirect('/');
         })
     }
     )

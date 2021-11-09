@@ -34,7 +34,6 @@ app.use('/join',registerRouter);
 
 //메인 페이지
 app.get('/', (req, res)=> {
-    console.log(process.env.GoogleAuth_ClientID);
    if(req.user) res.sendFile(__dirname+ '/Front/html/mainTest.html');
    else res.redirect('/login');
 })
