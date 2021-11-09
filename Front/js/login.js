@@ -98,9 +98,9 @@ $(document).ready(function () {
     var closeBtn = $(".close");
     var memberjoinbt = $("#memberjoinbtn");
     closeBtn.click(function () {
-        reset();
+        reset();        
     });
     memberjoinbt.click(function() {
         reset();
-    })
+    })    
 });
