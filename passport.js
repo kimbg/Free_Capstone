@@ -168,7 +168,7 @@ module.exports = function (app) {
     (req,res) => {
         req.session.save(() => {
             console.log("카카오 로그인 성공!");
-            res.redirect('/');
+            res.redirect('/main');
         })
     }
     )

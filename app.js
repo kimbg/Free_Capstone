@@ -1,6 +1,6 @@
 var express = require('express');
-var app = module.exports = express();
-var mysql = require('mysql');
+var app = express();
+var mysql = require('./config')._mysql;
 var session = require('express-session');
 var MySQLStore = require('express-mysql-session')(session);
 const loginRouter = require('./routes/login');
@@ -25,17 +25,60 @@ app.use(express.static('Front/'));
 app.use(express.urlencoded({extended:false}));
 const passport = require('./passport')(app);
 
+
+
 app.use('/login',loginRouter);
 app.use('/join',registerRouter);
 //아래 두코드는 보류
 //app.use('/auth/google',authRouter.google);
 //app.use('/auth/kakao',authRouter.kakao);
 
+///*testcode
+
+app.get('/image/:id',(req,res)=> {
+    
+    res.sendFile(__dirname + `/Image/${req.params.id}.jpg`);
+})
+
+app.post('/sendajax',(req,res)=> {
+    console.log("receive ajax!");
+    console.log("json data : ",req.body.num);
+    var sendData;
+    mysql.getConnection((err,conn)=> {
+        conn.query(`select * from noticeBoard where num = ?`,[req.body.num],(err,result)=> {
+            if(err){
+                console.log(err);                
+                sendData = 'noData';
+                //return res.redirect('/login');
+            }
+            else if(!result[0]){
+                console.log('결과 없음');
+                sendData = 'noData';
+                //return res.json({data : null});
+            }
+            else sendData = result;
+
+            console.log(result);
+            conn.release();
+            //res.json({data : sendData});
+            res.send(sendData);
+        })
+    })  
+    
+})
+
+
+
+//*///testcode
+
 
 //메인 페이지
 app.get('/', (req, res)=> {
-   if(req.user) res.sendFile(__dirname+ '/Front/html/mainTest.html');
-   else res.redirect('/login');
+  res.redirect('/login');
+})
+
+app.get('/main',(req,res)=>{
+    res.sendFile(__dirname + '/Front/html/mainTest.html');
 })
 
 //로그아웃
