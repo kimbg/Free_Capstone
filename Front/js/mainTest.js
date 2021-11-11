@@ -56,7 +56,6 @@ var swit = true;
 //let i = 1; //이 코드는 db순서대로 가져오는코드
 let backNum; //이 변수는 db뒤붙 가져오는 코드
 $(function () {
-   
     $.ajax({
         url : '/receiveDbLength',
         type : 'POST',
