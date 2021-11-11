@@ -25,10 +25,6 @@ function closeDlg()  //Dlg닫는 함수
 // addItem += '</div> </div> </dialog> </div>';
 
 function AddItem(data) {
-    //console.log('이게되냐?',JSON.parse(data).num);
-    //var sibal = JSON.parse(data);
-    //console.log(JSON.stringify(data));
-    //console.log(data["num"]);    
 
     return `<h1>Title</h1>
     <img src = "http://localhost:3000/image/${data[0].num}" class = "main_photo">  
@@ -57,41 +53,71 @@ $(document).on('click', '.contentbt', function () {
 });
 
 var swit = true;
-let i = 1;
-
+//let i = 1; //이 코드는 db순서대로 가져오는코드
+let backNum; //이 변수는 db뒤붙 가져오는 코드
 $(function () {
    
+    $.ajax({
+        url : '/receiveDbLength',
+        type : 'POST',
+    })
+    .done(function(data){
+        backNum = data;
+        console.log("가져온 db길이 : ",backNum);
+    })
+    .fail(function(data,textStatus,errorThrown) {
+            console.log("fail ajax");
+            console.log(errorThrown);
+    })
     
-    // $('#wrap').scroll(function () {
-    //     var scrollT = $(this).scrollTop(); //스크롤바의 상단위치
-    //     var scrollH = $(this).height(); //스크롤바를 갖는 div의 높이
-    //     var contentH = $('#content_bar').height(); //문서 전체 내용을 갖는 div의 높이
-    //     if (scrollT + scrollH + 1 >= contentH && swit) // 스크롤바가 아래 쪽에 위치할 때
-    //     {
-    //         swit = false;
-    //          $.ajax({
-    //             url : '/sendajax',
-    //             type : 'POST',
-    //             dataType : "JSON",
-    //             data : {'num' : i},
-    //         })
-    //         .done(function(data){
-    //             if(data.data != 'noData'){
-    //                 console.log('done부분의 data : ',data);
-    //                 i++;                            
-    //                 $('#content_bar').append(AddItem(data));            
-    //                 swit = true;
-    //             }
-    //             //console.log('swit : ',data);
-    //         })
-    //         .fail(function(data,textStatus,errorThrown) {
-    //             //console.log("fail ajax");
-    //             //console.log(errorThrown);
-    //         })
+    
+    $('#wrap').scroll(function () {
+        var scrollT = $(this).scrollTop(); //스크롤바의 상단위치
+        var scrollH = $(this).height(); //스크롤바를 갖는 div의 높이
+        var contentH = $('#content_bar').height(); //문서 전체 내용을 갖는 div의 높이
+        if (scrollT + scrollH + 1 >= contentH && backNum > 0 && swit) // 스크롤바가 아래 쪽에 위치할 때
+        {
+            swit = false;
+            $.ajax({
+                url : '/sendajax',
+                type : 'POST',
+                data : {'num' : backNum},
+            })
+            .done(function(data) {
+                if(data != 'noData'){
+                    console.log('done부분의 data : ',data);
+                    $('#content_bar').append(AddItem(data));            
+                    swit = true;
+                    backNum--;
+                }
+                //console.log('swit : ',data);
+            })
+
+
+            //아래주석이 db순서대로 가져오는 코드
+            //게시물의 경우 최신 게시글이 먼저 보여야하기때문에 아래코드는 순서가 반대임
+            //  $.ajax({
+            //     url : '/sendajax',
+            //     type : 'POST',
+            //     dataType : "JSON",
+            //     data : {'num' : i},
+            // })
+            // .done(function(data){
+            //     if(data.data != 'noData'){
+            //         console.log('done부분의 data : ',data);
+            //         i++;                            
+            //         $('#content_bar').append(AddItem(data));            
+            //         swit = true;
+            //     }
+            //     //console.log('swit : ',data);
+            // })
+            // .fail(function(data,textStatus,errorThrown) {
+            //     //console.log("fail ajax");
+            //     //console.log(errorThrown);
+            // })
             
-    //       //console.log("123");
            
-    //     }
-    // });
+        }
+    });
 });
 	//여기까지 추가내용 불러오기

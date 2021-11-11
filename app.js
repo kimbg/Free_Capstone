@@ -40,8 +40,49 @@ app.get('/image/:id',(req,res)=> {
     res.sendFile(__dirname + `/Image/${req.params.id}.jpg`);
 })
 
+app.post('/receiveDbLength',(req,res)=> {
+    var cnt = 0;
+    console.log("receiveDbLength ajax receive!");
+    mysql.getConnection((err,conn)=> {
+        conn.query(`select count(*) as length from noticeBoard`,(err,result)=> {
+            if(err){
+                console.log(err);
+                console.log('err1');
+            }
+            else if(!result[0]) {
+                console.log("결과 없음");
+            }
+            else cnt = result[0].length;
+            conn.release();
+            res.status(200).send(cnt.toString());
+        })
+    })  
+})
+
 app.post('/sendajax',(req,res)=> {
+
     console.log("receive ajax!");
+    mysql.getConnection((err,conn)=> {
+        conn.query(`select * from noticeBoard where num = ?`,[req.body.num],(err,result)=> {
+            if(err){
+                console.log(err);                
+                sendData = 'noData';
+                //return res.redirect('/login');
+            }
+            else if(!result[0]){
+                console.log('결과 없음');
+                sendData = 'noData';
+                //return res.json({data : null});
+            }
+            else sendData = result;
+
+            console.log(result);
+            conn.release();
+            //res.json({data : sendData});
+            res.send(sendData);
+        })
+    })  
+    /*
     console.log("json data : ",req.body.num);
     var sendData;
     mysql.getConnection((err,conn)=> {
@@ -64,6 +105,7 @@ app.post('/sendajax',(req,res)=> {
             res.send(sendData);
         })
     })  
+    */
     
 })
 
