@@ -35,17 +35,39 @@
 				<div class = "forDlg"> <!--Dlg를 띄우기 위한 div-->
 					<dialog id = "myDlg"> <!--Dlg선언-->
 						<a href = '#' onclick = "closeDlg()" id = "closebtn">X</a> <!--Dlg를 닫을때 사용되는 X표시-->
-						<div id = "screen"> <!--X표 밑의 Dlg내용-->
-							<div id = "screen_aside_left"> <!--Dlg의 왼쪽 내용 즉 사진 파트-->
-								<img src = "http://placehold.it/100x100" id = "map"> <!--사진들어가야할 위치-->
+						<div class = "screen"> <!--X표 밑의 Dlg내용-->
+							<div class = "screen_aside_left"> <!--Dlg의 왼쪽 내용 즉 사진 파트-->
+								<img src = "http://placehold.it/100x100" class = "map"> <!--사진들어가야할 위치-->
 							</div> <!--Dlg 왼쪽 div 닫아주고-->
-							<div id = "screen_aside_right"> <!--Dlg오른쪽 파트-->
+							<div class = "screen_aside_right"> <!--Dlg오른쪽 파트-->
 								<div>경상남도 김해시 인제로 197</div> <!--주소및 다른 내용-->
 								<h4>인제대학교</h4>				
 							</div><!--Dlg 오른쪽 div 닫고-->
 						</div><!--x표시 밑에 있는 Dlg div닫아주고-->
 					</dialog><!--Dlg닫아주고-->
 				</div><!--Dlg를 위해 있는 div닫아주고-->
+
+				<div class = "ForwriteDlg"> <!--Dlg를 띄우기 위한 div-->
+					<form action = "/write" method="POST" enctype="multipart/form-data">
+						<dialog id = "writeDlg"> <!--Dlg선언-->		
+							<a href = "#" onclick = "closeBtn();">X</a>			
+							<div class = "left window drop-zone">
+								<!---->
+									<span class="drop-zone__prompt">Drop file here or click to upload</span>													
+									<input type = "file" name = "myfile" class = "drop-zone__input" id = "fileselector" >            
+								<!---->                          
+							</div>            
+							<div class = "right window drop-zone" id = "rightWindow">
+								<textarea id = "area1" placeholder="글을 입력해주세요" name = "comment1"></textarea>            
+								<hr>
+								<textarea id = "area2" row = "2" placeholder="사진의 장소는 어디인가요?" name = "comment2"></textarea>            
+								<button type = "submit" >글쓰기</button>
+								<button type = "button" id = "cancelBtn">글쓰기 취소</button>
+							</div>
+						</dialog><!--Dlg닫아주고-->
+					</form>
+				</div><!--Dlg를 위해 있는 div닫아주고-->
+
 
 
 				<h1>Title</h1>
@@ -57,6 +79,7 @@
 			<div>another Content</div>
 		</div>
 	</main>
+	<button type = "button"><img id = "writeBtn" src = "/picture/글쓰기아이콘.png"/></button>
 	
 	<script type = "text/javascript" src = "/js/mainTest.js"></script>
 </body>

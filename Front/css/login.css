@@ -20,6 +20,10 @@
             text-align: center;
         }
 
+        #mainPhoto {
+            width : 150px;
+            height : 150px;
+        }
         .row {
             flex-direction: row;
             display: flex;
