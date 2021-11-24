@@ -1,0 +1,237 @@
+		body {background: rgb(170,170,170);}
+		h1 {margin-right: 10px;}
+		button {text-decoration: none; border : none;}
+		header {
+			background: white;
+			position: fixed;
+			top: 0;
+			width: 100%;
+			height: 80px;
+			left: 0;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			border-bottom: 1px solid black;
+		}
+		header form {
+			margin-top: 15px;
+			margin-right: 10px;
+		}
+		header form input {
+			height: 30px;
+			border-radius: 5px;
+		}
+		a {text-decoration: none;}
+		nav {margin-left: 40px;	}
+		#togglebtn {display: none;}
+	/*<!--메인-->*/
+		main {
+			width : 800px;
+			height : 700px;
+			margin : 0 auto;
+			background: white;
+			margin-top : 95px;
+			background: inherit;
+		}
+		div#wrap {
+			float : left;
+			width : 550px;
+			overflow-y : scroll;
+			height : 700px;
+			margin-right: 10px;
+			background: white;
+		}
+		.main_photo {
+			width : 100%;
+		}
+		.content_end {
+			margin-bottom: 15px;
+			margin-top: 15px;
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			border-bottom: 1px solid black;
+		}
+		#sidebar {
+			float : left;
+			width : 200px;
+			background: white;
+			height : 700px;
+		}
+		#closebtn {margin-bottom: 100px; color : white; font-size : 2em;}
+        #myDlg {
+            width : 50%;
+            height : 75%;
+            border : none;
+            background : inherit;
+        }
+		#writeDlg {
+			width : 50%;
+            height : 75%;
+            border : none;
+            background : inherit;
+		}
+        .screen {
+            width : 100%;
+            height : 90%;
+            overflow : hidden;
+            background: white;
+            border-radius: 5px;
+        }
+        .screen_aside_left {
+            width : 60%;
+            height : 100%;
+            float:left;
+            margin-top : 7px;
+            margin-left : 7px;
+            margin-bottom : 7px;
+        }
+        .screen_aside_right {
+            width : 35%;
+            height : 100%;
+            float : right;
+            margin-top : 10px;
+        }
+        .map {
+            width : 100%;
+            height : 97%;
+            border-radius: 5px;
+        }
+        h4 {margin : 3px;}
+		.forDlg {display: none;}
+		#writeBtn {
+			position : absolute;
+			width : 100px;
+			height : 100px;
+			right : 10px;
+			bottom : 10px;
+		}
+	
+
+		/*Dlg Code*/
+
+		.ForwriteDlg {display : none;}
+        #writeDlg {
+			width : 100%;
+            height : 80%;
+            border : none;
+            background : inherit;
+            display: flex;
+            justify-content: center;
+            transition : 4s;
+            transition-duration: 2s;
+		}
+        .window {
+            width : 40%;
+            height : 80%;
+            background-color: white;
+            transition : 4s;
+        }
+        .left {
+            display: flex;
+            justify-content : center;
+            align-items: center !important;
+            padding : 10px;
+            overflow: hidden;
+        }
+        .right {
+            display: none;
+        }
+
+        .drop-zone {            
+            padding : 50px;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-family: 'Quicksand',sans-serif;
+            font-weight: 500;
+            font-size: 20px;
+            cursor : pointer;
+            color : #cccccc;
+            border : 4px dashed #009578;
+            border-radius: 10px;
+        }
+        
+        .drop-zone--over {
+            border-style : solid;
+        }
+        
+        .drop-zone__input {
+            display: none;
+        }
+        
+        .drop-zone__thumb {
+            width : 100%;
+            height : 100%;
+            border-radius : 10px;
+            overflow : hidden;
+            background-color: #cccccc;
+            background-size: cover;
+            position : relative;
+        }
+        
+        .drop-zone__thumb::after {
+            content : attr(data-label);
+            position : absolute;
+            bottom : 0; 
+            left : 0;
+            width : 100%;
+            padding : 5px 0;
+            color : #ffffff;
+            background : rgba(0,0,0,0.75);
+            font-size : 14px;
+            text-align: center;
+        }
+        #area1 {
+            width : 100%;
+            height : 60%;
+			resize: none;
+        }
+        #area2 {
+            width : 100%;
+            height : 20%;
+			resize: none;
+        }
+
+        
+
+
+
+
+		/*Dlg Code*/
+
+        /* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+  ::-webkit-scrollbar {
+    width: 15px;
+    display:none;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    border-radius: 3px;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 3px;
+  }
