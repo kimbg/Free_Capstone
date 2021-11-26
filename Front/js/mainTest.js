@@ -28,9 +28,9 @@ function closeDlg()  //Dlg닫는 함수
 function AddItem(data) {
 
     return `<h1>Title</h1>
-    <img src = "http://localhost:3000/image/${data[0].num}" class = "main_photo">  
+    <img src = "http://localhost:3000/image/${data.id}" class = "main_photo">  
     <div class = "content_end"> 
-    <div>${data[0].comment}</div>  
+    <div>${data.comment}</div>  
     <button type = "button" class = "contentbt"><img src = "http://placehold.it/45x45"></button>    
     </div>  
     <div class = "forDlg">  
@@ -60,15 +60,21 @@ $(document).on('click', '#writeBtn', function () {
 
 var swit = true;
 //let i = 1; //이 코드는 db순서대로 가져오는코드
-let backNum; //이 변수는 db뒤붙 가져오는 코드
+let cnt; //이 변수는 db뒤붙 가져오는 코드
 $(function () {
     $.ajax({
-        url : '/receiveDbLength',
+        url : '/mainInit',
         type : 'POST',
     })
     .done(function(data){
-        backNum = data;
-        console.log("가져온 db길이 : ",backNum);
+        
+        // backNum = data;
+        // console.log("가져온 db길이 : ",backNum);
+        for(let i = 0 ; i < data.length; i++)
+        {
+            $('#content_bar').append(AddItem(data[i]));              
+        }
+        cnt = data.length;
     })
     .fail(function(data,textStatus,errorThrown) {
             console.log("fail ajax");
@@ -80,20 +86,20 @@ $(function () {
         var scrollT = $(this).scrollTop(); //스크롤바의 상단위치
         var scrollH = $(this).height(); //스크롤바를 갖는 div의 높이
         var contentH = $('#content_bar').height(); //문서 전체 내용을 갖는 div의 높이
-        if (scrollT + scrollH + 1 >= contentH && backNum > 0 && swit) // 스크롤바가 아래 쪽에 위치할 때
+        if (scrollT + scrollH + 1 >= contentH && swit) // 스크롤바가 아래 쪽에 위치할 때
         {
             swit = false;
             $.ajax({
                 url : '/sendajax',
                 type : 'POST',
-                data : {'num' : backNum},
+                data : {'num' : cnt},
             })
             .done(function(data) {
                 if(data != 'noData'){
                     console.log('done부분의 data : ',data);
-                    $('#content_bar').append(AddItem(data));            
+                    $('#content_bar').append(AddItem(data[0]));            
                     swit = true;
-                    backNum--;
+                    cnt++;
                 }
                 //console.log('swit : ',data);
             })
@@ -128,7 +134,7 @@ $(function () {
 	//여기까지 추가내용 불러오기
 
 
-//Dlg Code
+//Dlg Code 여기서 부터는 Dlg Code
 
 document.querySelectorAll(".drop-zone__input").forEach(inputElement => {
     const dropZoneElement = inputElement.closest(".drop-zone");

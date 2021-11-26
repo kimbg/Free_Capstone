@@ -42,23 +42,18 @@ const upload = multer({storage : storage});
 
 // session 을 생성하고 db 에 저장
 
-const sessionOptions = {
-    clearExpired : true,                // 만료된 세션 자동 확인 및 지우기 여부
-    checkExpirationInterval : 900000,   // 만료된 세션이 지워지는 빈도 milliseconds
-    expiration: 86400000,               // 유효한 세션의 최대 기간 milliseconds
-    createDatabaseTable : true,         // 세션 데이터베이스 테이블 생성 여부, 존재하지 않는 경우
-};
-
 // session 을 생성하고 db 에 저장
-const sessionStore = new MySQLStore(sessionOptions, mysql);
 app.use(session({
-	key: 'session_cookie_name',
-	secret: 'session_cookie_secret',
-	store: sessionStore,
-	resave: false,
-	saveUninitialized: false
+	secret              : 'secret',
+	resave              : false,
+	saveUninitialized   : true, //이거false시 세션 데이터가 저장이 안되서 true로 바꿔놨음
+    store : new MySQLStore({
+        host : 'localhost',
+        user : 'root',
+        password : '2wndeo12#',
+        database : 'opentutorials'
+    })
 }));
-//sessionStore.close();
 
 app.use(express.static('Front/'));
 app.use(express.urlencoded({extended:false}));
@@ -81,11 +76,11 @@ app.get('/image/:id',(req,res)=> {
     res.sendFile(__dirname + `/Image/${req.params.id}.jpg`);
 })
 
-app.post('/receiveDbLength',(req,res)=> {
+app.post('/mainInit',(req,res)=> {
     var cnt = 0;
-    console.log("receiveDbLength ajax receive!");
+    console.log("mainInit ajax receive!");
     mysql.getConnection((err,conn)=> {
-        conn.query(`select count(*) as length from noticeBoard`,(err,result)=> {
+        conn.query(`select * from noticeBoard order by id desc limit 3`,(err,result)=> {
             if(err){
                 console.log(err);
                 console.log('err1');
@@ -93,17 +88,32 @@ app.post('/receiveDbLength',(req,res)=> {
             else if(!result[0]) {
                 console.log("결과 없음");
             }
-            else cnt = result[0].length;
+            console.log('가져온 값 : ',result);
             conn.release();
-            res.status(200).send(cnt.toString());
+            res.send(result);
         })
     })  
+    // mysql.getConnection((err,conn)=> {
+    //     conn.query(`select count(*) as length from noticeBoard`,(err,result)=> {
+    //         if(err){
+    //             console.log(err);
+    //             console.log('err1');
+    //         }
+    //         else if(!result[0]) {
+    //             console.log("결과 없음");
+    //         }
+    //         else cnt = result[0].length;
+    //         conn.release();
+    //         res.status(200).send(cnt.toString());
+    //     })
+    // })  
+   
 })
 
 app.post('/sendajax',(req,res)=> {
     console.log("receive ajax!");
     mysql.getConnection((err,conn)=> {
-        conn.query(`select * from noticeBoard where num = ?`,[req.body.num],(err,result)=> {
+        conn.query(`select * from noticeBoard order by id desc limit ?,1`,[parseInt(req.body.num)],(err,result)=> {
             if(err){
                 console.log(err);                
                 sendData = 'noData';
@@ -131,7 +141,18 @@ app.post('/sendajax',(req,res)=> {
 
 //메인 페이지
 app.get('/', (req, res)=> {    
-  res.redirect('/login');
+
+    mysql.getConnection((err,conn)=> {
+        conn.query("select * from noticeBoard",(err,result)=>{
+            if(err){
+                console.log("err execute");
+                console.log(err);
+                
+            }
+            console.log("결과값 : ",result);
+        })
+    })
+    res.redirect('/login');
 })
 
 app.get('/main',(req,res)=>{
