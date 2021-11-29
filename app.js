@@ -70,7 +70,7 @@ app.post('/write',upload.single('myfile'),(req,res)=>{
 })
 
 app.get('/image/:id',(req,res)=> {
-    console.log(req.params.id);
+    //console.log(req.params.id);
     res.sendFile(__dirname + `/Image/${req.params.id}.jpg`);
 })
 
@@ -91,21 +91,6 @@ app.post('/mainInit',(req,res)=> {
             res.send(result);
         })
     })  
-    // mysql.getConnection((err,conn)=> {
-    //     conn.query(`select count(*) as length from noticeBoard`,(err,result)=> {
-    //         if(err){
-    //             console.log(err);
-    //             console.log('err1');
-    //         }
-    //         else if(!result[0]) {
-    //             console.log("결과 없음");
-    //         }
-    //         else cnt = result[0].length;
-    //         conn.release();
-    //         res.status(200).send(cnt.toString());
-    //     })
-    // })  
-   
 })
 
 app.post('/sendajax',(req,res)=> {
@@ -132,6 +117,22 @@ app.post('/sendajax',(req,res)=> {
     })  
 })
 
+app.post('/getMarkers',(req,res)=> {
+    mysql.getConnection((err,conn)=> {
+        conn.query(`select * from markers`,(err,result)=> {
+            if(err){
+                console.log("err1")                
+            }
+            else if(!result[0]){
+                console.log("err2");
+            }
+            else console.log("no problem");
+
+            console.log("최종 데이터 : ",result);
+            res.send(result);
+        })
+    })
+})
 
 
 //*///testcode
