@@ -31,7 +31,6 @@ const storage = multer.diskStorage({
                 if(err){
                     console.log('err1');
                 }                
-                else cnt = result[0].length;                
             })
         })  
         
@@ -126,14 +125,30 @@ app.post('/getMarkers',(req,res)=> {
             else if(!result[0]){
                 console.log("err2");
             }
-            else console.log("no problem");
 
-            console.log("최종 데이터 : ",result);
+            conn.release();
             res.send(result);
         })
     })
 })
 
+app.get('/registerCoords',(req,res)=> {
+    res.sendFile(__dirname+'/Front/html/registerCoords.html');
+})
+app.post('/submitCoords',(req,res)=> {
+    mysql.getConnection((err,conn)=> {
+        conn.query(`insert into markers (lat,lng) values(?,?)`,[req.body.lat,req.body.lng],(err,result)=> {
+            if(err){
+                console.log("err1");                
+                console.log(err);
+            }           
+            conn.release();
+            
+        })
+    })
+    console.log("res.redirect('/')");
+    res.status(200).send({result : 'redirect'});
+})
 
 //*///testcode
 
