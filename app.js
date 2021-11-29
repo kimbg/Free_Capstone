@@ -40,9 +40,7 @@ const storage = multer.diskStorage({
 })
 const upload = multer({storage : storage});
 
-// session 을 생성하고 db 에 저장
 
-// session 을 생성하고 db 에 저장
 app.use(session({
 	secret              : 'secret',
 	resave              : false,
@@ -142,17 +140,8 @@ app.post('/sendajax',(req,res)=> {
 //메인 페이지
 app.get('/', (req, res)=> {    
 
-    mysql.getConnection((err,conn)=> {
-        conn.query("select * from noticeBoard",(err,result)=>{
-            if(err){
-                console.log("err execute");
-                console.log(err);
-                
-            }
-            console.log("결과값 : ",result);
-        })
-    })
-    res.redirect('/login');
+   res.sendFile(__dirname + '/Front/html/kakao-Map.html');
+    //res.redirect('/login');
 })
 
 app.get('/main',(req,res)=>{
