@@ -1,195 +1,104 @@
-        * {
-            text-decoration: none;
-        }
+body {
+    margin: 0;
+}
 
-        html {
-            height: 100%;
-        }
+#content {
+    height: 100vh;
 
-        body {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            background: rgb(224, 224, 224);
-        }
+    display: grid;                          /*grid 적용 공부중*/
+    grid-template-areas: "paint . main .";
+    grid-template-columns: 6fr 20px 300px 2fr;
+}
 
-        .center {
-            text-align: center;
-        }
+#paint {
+    grid-area: paint;
+    overflow: hidden;
+    background-color: rgb(255, 130, 125);
+}
 
-        .row {
-            flex-direction: row;
-            display: flex;
-        }
+#main {
+    grid-area: main;
+    /*background-color: rgb(158, 158, 158);/**/
 
-        #login {
-            z-index: 2;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            background: white;
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
-            border-radius: 5px;
+    height: 100vh;
 
-            width: 400px;
-            height: 500px;
-            margin: -250px 0 0 -200px;
-            transition: 3s;
-        }
+    display: grid;
+    grid-template-areas: "." "logo" "form" "menu" "line" "kakao" "google" ".";
+    grid-template-rows: 1fr 200px 140px 30px 30px 50px 50px 2fr;
+}
 
-        #loginform {
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
-        }
+#logo {
+    grid-area: logo;
+    margin: auto;
+    width: 40%;
+}
 
-        .photo {
-            margin-bottom: 10px;
-        }
+#mainform {
+    grid-area: form;
+    height: 140px;
+    width : 100%;
+    /*background-color: rgb(0, 255, 115);/**/
+    display: grid;
+    justify-content: stretch;
+}
 
-        #loginform>input {
-            width: 75%;
-            height: 35px;
-            margin: 0 auto;
-            margin-top: 5px;
-            background: rgb(233, 233, 233);
-            border: none;
-            border-radius: 3px;
-        }
+.inputbox {
+    height: 30px;
+    background: rgb(233, 233, 233);
+    margin: 1px;
+    border: none;
+    border-radius: 10px;
+}
 
-        #row_1 {
-            margin-top: 10px;
-            margin-bottom: 10px;
-        }
+#inputchk {
+    height: 30px;
+    margin: 1px;
+}
 
-        #row_1>input {
-            margin-left: 12.5%
-        }
+#inputbtn {
+    height: 30px;
+    background: rgb(228, 112, 112);
+    margin: 1px;
+    border: none;
+    border-radius: 10px;
+}
 
-        #loginbt {
-            color: white;
-            background: rgb(250, 122, 128);
-            width: 75%;
-            height: 35px;
-            margin: 0 auto;
-            border: none;
-            border-radius: 3px;
-            margin-bottom: 5px;
-        }
+#sub {
+    grid-area: menu;
+    text-align: center;
+}
 
-        #row_2 {
-            justify-content: space-around;
-            width: 75%;
-            margin-left: 12.5%
-        }
+#line {
+    grid-area: line;
+    text-align: center;
+}
 
-        #row_2 a {
-            color: black;
-        }
+#kakao {
+    grid-area: kakao;
+}
 
+#google{
+    grid-area: google;
+}
 
-        #join_window {
-            position: absolute;
-            z-index: 0;
-            width: 400px;
-            height: 500px;
-            opacity: 0;
+#kakao-img {
+    width: 100%;
+}
 
+#google-img {
+    width: 100%;
+}
 
-            top: 50%;
-            left: 50%;
-            margin: -250px 0 0 -200px;
-            background: white;
+#art-img {
+    height: 100%;
+}
 
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
-            text-align: center;
-
-            transition: 3s;
-        }
-        #joinform {
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
-            text-align: center;
-
-        }
-        #joinform > input {
-            width: 75%;
-            height: 35px;
-            margin: 0 auto;
-            margin-top: 5px;
-            background: rgb(233, 233, 233);
-            border: none;
-            border-radius: 3px;
-        }
-        #yak {
-            font-size : 1.3em;
-            font-weight: bold;
-        }
-        #joinform > textarea {
-            width: 75%;            
-            margin: 0 auto;
-            margin-top: 5px;
-            background: rgb(233, 233, 233);
-            border: none;
-            border-radius: 3px;
-        }
-        #joinform > div.row {
-            margin-left: 12.5%;
-        }
-        #memberjoinbtn {
-            color: white;
-            background: rgb(250, 122, 128);
-            width: 75%;
-            height: 35px;
-            margin: 0 auto;
-            border: none;
-            border-radius: 3px;
-            margin-bottom: 5px;
-        }
-
-        #find_id_window {
-            z-index: 0;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            background: white;
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
-            border-radius: 5px;
-            
-            opacity : 0;
-
-            width: 400px;
-            height: 500px;
-            margin: -250px 0 0 -200px;
-            transition: 3s;
-        }
-        #find_pw_window {
-            z-index: 0;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            background: white;
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
-            border-radius: 5px;
-
-            opacity : 0;
-
-            width: 400px;
-            height: 500px;
-            margin: -250px 0 0 -200px;
-            transition: 3s;
-        }
-        .close {
-            position:absolute;
-            top : 0;
-            right : 0;
-        }
+@media screen and (max-width: 900px) {      /*넓이가 (900px 보다)좁으면*/
+    #content {
+        grid-template-areas: ". main .";
+        grid-template-columns: 1fr 300px 1fr;
+    }
+    #paint {
+        display: none;
+    }
+}

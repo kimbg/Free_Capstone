@@ -1,0 +1,22 @@
+.post {
+    border-bottom: 1px solid black;
+    z-index: 5;
+}
+
+#postuser {
+    padding: 10px;
+    font-size: 30px;
+}
+
+#profile {
+    width: 10%;
+}
+
+#postimage {
+    width: 100%;
+}
+
+#postcomment {
+    padding: 10px;
+    font-size: 15px;
+}
