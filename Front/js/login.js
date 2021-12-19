@@ -17,7 +17,39 @@ memberjoinbt.onmouseout = function () {
     memberjoinbt.style.fontSize = "1em";
 }
 
-
+function sendData() {
+    let id_val = document.getElementById("id_input").value;
+    let pw_val = document.getElementById("pw_input").value;
+    let name_val = document.getElementById("name_input").value;
+    let birth_val = document.getElementById("birth_input").value;
+    if(id_val === undefined || pw_val === undefined || name_val === undefined || 
+        birth_val === undefined) {
+            alert("양식이 알맞게 채워졌는지 확인해주세요!")
+            return;
+        }
+    $.ajax({
+        url : '/join',
+        type : 'POST',
+        data : {
+            id : id_val,
+            pw : pw_val,
+            name : name_val,
+            birth : birth_val
+        }
+    })
+    .done(function(data) {
+       console.log(data);
+       if(data.data === 'not')
+       {
+           alert("이미 중복되는 아이디가 있습니다. 다른 아이디로 바꿔주세요!");
+       }
+       else if (data.data === "success")
+       {
+           alert("회원가입 성공하셨습니다! 로그인을 해주세요!")
+           window.location.reload();
+       }
+    })
+}
 
 
 $(document).ready(function () {
@@ -96,11 +128,8 @@ $(document).ready(function () {
     });
 
     var closeBtn = $(".close");
-    var memberjoinbt = $("#memberjoinbtn");
     closeBtn.click(function () {
         reset();        
     });
-    memberjoinbt.click(function() {
-        reset();
-    })    
+    
 });

@@ -35,20 +35,20 @@
 
     <div id="join_window">
         <button type = "button" class = "close">X</button>
-        <form id = "joinform" action = "join" method = "POST">
+        <!-- <form id = "joinform" action = "join" method = "POST"> -->
             <div class = "photo"><img src = "http://placehold.it/50x50"></div>
-        <input type = "text" name = "id" placeholder="아이디(휴대폰 번호 또는 이메일 주소)" required/>
-        <input type = "text" name = "pw" placeholder="비밀번호" required/>
-        <input type = "text" name = "name" placeholder="이름" required/>
-        <input type = "text" name = "birth" placeholder="생년월일(YY/MM/DD)" required/>
-        <div class = "row" id = "yak">약관</div>
-        <textarea id = "area" rows="5" readonly>회원가입 약관 스크롤 바 형식 어쩌구 저쩌구 </textarea>
-        <div class = "row">
-            <input type = "checkbox" id = "yakgwanbtn"  required>
-            <label for = "yakgwanbtn">동의합니다.</label>
-        </div>
-        <button type = "submit" id = "memberjoinbtn">회원가입</button>
-        </form>
+            <input type = "text" id = "id_input" name = "id" placeholder="아이디(휴대폰 번호 또는 이메일 주소)" required/>
+            <input type = "text" id = "pw_input" name = "pw" placeholder="비밀번호" required/>
+            <input type = "text" id = "name_input" name = "name" placeholder="이름" required/>
+            <input type = "text" id = "birth_input" name = "birth" placeholder="생년월일(YY/MM/DD)" required/>
+            <div class = "row" id = "yak">약관</div>
+            <textarea id = "area" rows="5" readonly>회원가입 약관 스크롤 바 형식 어쩌구 저쩌구 </textarea>
+            <div class = "row">
+                <input type = "checkbox" id = "yakgwanbtn"  required>
+                <label for = "yakgwanbtn">동의합니다.</label>
+            </div>
+            <button type = "button" id = "memberjoinbtn" onclick = "sendData();">회원가입</button>
+        <!-- </form> -->
     </div>
     <div id = "find_id_window">
         <button type = "button" class = "close">X</button>

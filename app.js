@@ -156,8 +156,8 @@ app.post('/submitCoords',(req,res)=> {
 //메인 페이지
 app.get('/', (req, res)=> {    
 
-   res.sendFile(__dirname + '/Front/html/kakao-Map.html');
-    //res.redirect('/login');
+    //res.sendFile(__dirname + '/Front/html/kakao-Map.html');
+    res.redirect('/login');
 })
 
 app.get('/main',(req,res)=>{
