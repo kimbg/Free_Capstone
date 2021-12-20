@@ -7,6 +7,7 @@ const auth_router = require('./ggot_auth')
 const logout_router = require('./ggot_logout')
 const register_router = require('./ggot_register')
 const page_router = require('./ggot_page')
+const map_router = require('./ggot_map')
 
 //메인 페이지 리다이랙트
 router.get('/', (req, res) => {
@@ -33,5 +34,6 @@ router.use('/auth', auth_router)
 router.use('/logout', logout_router)
 router.use('/register', register_router)
 router.use('/page', page_router)
+router.use('/map', map_router)
 
 module.exports = router

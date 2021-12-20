@@ -1,31 +1,28 @@
 const multer = require('multer');
-const fs = require('fs');
+const mysql = require('../src/ggot_mysql')._mysql
 
 const storage = multer.diskStorage({
-    destination : (req,file,cb)=> {cb(null,__dirname + '/Image');},
-    filename : (req,file,cb) => {
-        let fname = file.originalname;
-        let dotPosition = fname.length - 4;
-        let frontName = fname.substr(0,dotPosition);
-        let backName = fname.substr(dotPosition,fname.length);
-        let i = 1;
+    destination: (req, file, cb) => {
+        cb(null, './image');
+    },
+    filename: (req, file, cb) => {
 
-        while(fs.existsSync(`./image/${fname}`))
-        {
-            fname = frontName + `(${i})` + backName;        
-            i++;            
-        }
-        
-        mysql.getConnection((err,conn)=> {
-            conn.query(`insert into noticeBoard (userid,comment) values('김병관',?)`,[fname],(err,result)=> {
-                conn.release();
-                if(err){
-                    console.log('err1');
-                }                
-            })
-        })  
-        
-        cb(null,fname);
+        const sql = 'select * from noticeboard order by number desc limit 1'
+        mysql.query(sql, (err, results) => {
+            if (err)
+            {
+                console.log(err);
+            }
+            else
+            {
+                cb(null, "" + (results[0].number + 1) + "." + file.originalname.split('.')[1]);
+            }
+        })
     }
 })
+
 const upload = multer({storage : storage});
+
+module.exports = {
+    _upload : upload,
+}

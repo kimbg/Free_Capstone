@@ -9,10 +9,11 @@ $('#main').scroll(() => {
     const scrollTop = $('#main').scrollTop()
     const mainHeight = $('#main').height()
     const contentHeight = $('#content_bar').height()
-
-    if((scrollTop >= contentHeight - mainHeight) && loaded)
+    
+    if((scrollTop >= contentHeight - mainHeight * 2) && loaded)
     {
         loaded = false;
+        console.log("!!!");
         AddItem(5);
     }
 })
@@ -24,9 +25,7 @@ function AddItem(count) {
         data : {'flag' : postflag, 'value' : count}
     })
     .done((data) => {
-    
         if(data != 'noData') {
-
             for(let i = 0; i < data.length; i++) {
                 $('#content_bar').append(
                     `

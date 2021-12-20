@@ -13,6 +13,10 @@ body {
 
 #header {
     grid-area: header;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
     border-bottom: 1px solid black;
 }
 
@@ -22,13 +26,68 @@ body {
     border-right: 1px solid black;
     overflow-y: scroll;
 }
-#main::-webkit-scrollbar {
-    display: none;
-}
 
 #side {
     grid-area: side;
     border-right: 1px solid black;
+}
+
+#open_dlg_btn {
+    height: 100%;
+    justify-self: end;
+}
+
+#close_dlg_btn {
+    position: fixed;
+    height: 30px;
+    width: 30px;
+}
+
+#write_dlg_background {
+    position: fixed;
+    height: 100vh;
+    width : 100vw;
+    display: none;
+    place-items: center;
+    background-color: rgba(65, 65, 65, 0.5);
+    z-index : 1;
+}
+
+#write_dlg {
+    padding: 5px;
+    width : 50%;
+    height : 50%;
+
+    cursor : pointer;
+    
+    border-radius : 10px;
+    border : 4px dashed #009578;
+
+    display: grid;
+    align-items: stretch;
+    justify-items: stretch;
+}
+
+#drop_box {
+    display: grid;
+    place-items: center;
+}
+
+#upload_form {
+    display: none;
+    grid-template-rows: 2fr 1fr 30px;
+}
+
+#fileselector {
+    display: none;
+}
+
+#thumnail {
+    display: none;
+    width : 90%;
+    height : 90%;
+    border-radius : 10px;
+    background-color: #818181;
 }
 
 @media screen and (max-width: 900px) {      /*넓이가 (900px 보다)좁으면 사이드바 삭제*/
@@ -50,5 +109,10 @@ body {
 
     #side {
         display: none;
+    }
+
+    #write_dlg {
+        width : 90%;
+        height : 90%;
     }
 }

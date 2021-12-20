@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const mysql = require('../src/ggot_mysql')._mysql      //mysql
+const upload = require('../src/ggot_multer')._upload
 
 router.get('/main', (req, res) => {
     res.sendFile('/main.html', {root : `Front/html`})
@@ -76,5 +77,18 @@ router.post('/getcomments', (req, res) => {
             res.send(results);
     })
 })
+
+router.post('/write', upload.single('myfile'), (req,res) => {
+    const sql = 'INSERT INTO noticeboard (user_id, comment) VALUES (?, ?)'
+    mysql.query(sql, [req.session.passport.user.id ,req.body.comment1], (err, results) => {
+        if (err)
+        {
+            console.log(err);
+        }
+    })
+    res.redirect('/');
+})
+
+
 
 module.exports = router

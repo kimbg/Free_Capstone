@@ -9,9 +9,25 @@
         <script defer src = "/static/script/main.js"></script>                  <!--javascript 사용 defer을 사용(가장 이상적인 방법)-->
     </head>
     <body>
+        <div id = write_dlg_background>
+            <dialog id = "write_dlg">
+                <img id = "close_dlg_btn" src = "http://placehold.it/30x30">
+                <div id = "drop_box">
+                    <span id = "drop_box_span">Drop file here or click to upload</span>
+                    <div id = "thumnail"><label id = "thumnail_label"></div>
+                </div>
+                <form id = "upload_form" action = "/page/write" method="POST" enctype="multipart/form-data">
+                    <input type = "file" name = "myfile" id = "fileselector" >
+                    <textarea placeholder = "글을 입력해주세요" name = "comment1"></textarea>
+                    <textarea placeholder = "사진의 장소는 어디인가요?" name = "comment2"></textarea>
+                    <button type = "submit">글쓰기</button>
+                </form>
+            </dialog>
+        </div>
         <div id = "content">
             <div id = "header">
-                <h1>Brand</h1>
+                Brand
+                <img id = "open_dlg_btn" src = "http://placehold.it/45x45">
             </div>
             <div id = "main">
                 <div id = "content_bar">
