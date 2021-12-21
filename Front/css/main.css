@@ -1,5 +1,6 @@
 body {
     margin: 0;
+    background: rgb(224, 224, 224);
 }
 
 #content {
@@ -9,33 +10,99 @@ body {
     grid-template-areas: "header header header header" ". main side .";
     grid-template-columns: 1fr 600px 300px 1fr;
     grid-template-rows: 60px 1fr;
+    grid-gap: 2px;
 }
 
 #header {
     grid-area: header;
 
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 60px;
 
-    border-bottom: 1px solid black;
+    align-items: center;
+    background: rgb(255, 255, 255);
 }
 
 #main {
     grid-area: main;
-    border-left: 1px solid black;
-    border-right: 1px solid black;
+
     overflow-y: scroll;
+    background: rgb(247, 247, 247);
+}
+::-webkit-scrollbar {
+    display: none;
+}
+
+#content_bar {
+    display: grid;
+    grid-gap: 10px;
 }
 
 #side {
     grid-area: side;
-    border-right: 1px solid black;
+    background: rgb(255, 255, 255);
 }
 
-#open_dlg_btn {
-    height: 100%;
-    justify-self: end;
+#home_btn {
+    height: 50px;
 }
+
+/*프로필*/
+
+.profile {
+    width: 100%;
+    height: 100%;
+}
+.filter {
+    width: 50px;
+    height: 50px;
+    border-radius: 60%;
+    overflow: hidden;
+}
+
+/*포스트*/
+
+.post {
+    background: rgb(255, 255, 255);
+    box-shadow: 2px 2px 2px 2px rgb(209, 209, 209);
+}
+
+.postuser {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    grid-gap: 10px;
+
+    padding: 10px;
+    font-size: 30px;
+}
+
+.postimage {
+    width: 100%;
+}
+
+.postcomment {
+    padding: 10px;
+    font-size: 15px;
+}
+
+/*메뉴*/
+
+#menu_dlg {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    top: 62px;
+    right: 0px;
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    box-shadow: 2px 2px 2px 2px rgb(209, 209, 209);
+    background-color: rgb(255, 255, 255);
+}
+
+/*다이얼로그*/
 
 #close_dlg_btn {
     position: fixed;
@@ -50,7 +117,7 @@ body {
     display: none;
     place-items: center;
     background-color: rgba(65, 65, 65, 0.5);
-    z-index : 1;
+    z-index : 10;
 }
 
 #write_dlg {

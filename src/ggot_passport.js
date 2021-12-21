@@ -15,6 +15,7 @@ const add_user = (id, password, name) => {
             }
             else if(!user.length){
                 sql = 'INSERT INTO user (id, password, name) VALUES (?, ?, ?)'
+
                 conn.query(sql, [id, password, name],(err,result)=> {
                     conn.release()
                     if(err)
@@ -63,11 +64,11 @@ passport.use(new GoogleStrategy({
     },
     (accessToken, refreshToken, profile, done) => {
         const user = {
-            id: profile.displayName,
+            id: profile.displayName.replace(/(\s*)/g,""),
             pw: profile.id,
-            name : profile._json.name
+            name : profile._json.name.replace(/(\s*)/g,"")
         }
-
+        
         const result = add_user(user.id, user.pw, user.name)
 
         if(result == null) 
@@ -83,9 +84,9 @@ passport.use('kakao-login',new KakaoStrategy({
     },
     async(accessToken,refreshToken,profile,done)=> {
         const user = {
-            id : profile.displayName,
+            id : profile.displayName.replace(/(\s*)/g,""),
             pw : profile.id,
-            name : profile.username
+            name : profile.username.replace(/(\s*)/g,"")
         }
 
         const result = add_user(user.id, user.pw, user.name)

@@ -8,22 +8,42 @@ $(document).ready(() => {
     if(attribute == 'main') 
     {
         script_element.setAttribute('src', '/static/script/main_page.js');
-        css_element.setAttribute('href', '/static/css/main_page.css');
+        document.querySelector('head').appendChild(script_element);
     }
     else if(attribute == 'user')
     {
         script_element.setAttribute('src', '/static/script/user_page.js');
         css_element.setAttribute('href', '/static/css/user_page.css');
+        document.querySelector('head').appendChild(script_element);
+        document.querySelector('head').appendChild(css_element);
     }
     else if(attribute == 'post')
     {
         script_element.setAttribute('src', '/static/script/post_page.js');
         css_element.setAttribute('href', '/static/css/post_page.css');
+        document.querySelector('head').appendChild(script_element);
+        document.querySelector('head').appendChild(css_element);
     }
 
-    document.querySelector('head').appendChild(script_element);
-    document.querySelector('head').appendChild(css_element);
+    $.ajax({
+        url : '/page/get_myself',
+        type : 'POST',
+    })
+    .done((data) => {
+        $("#open_menu_btn").attr("src", `/profile/${data[0].id}.jpg`);
+    })
 })
+
+//메뉴 다이얼로그
+
+$('#open_menu_btn').on('click', () => {
+    if($('#menu_dlg').css("display") == "none")
+        $('#menu_dlg').css("display", "grid");
+    else
+        $('#menu_dlg').css("display", "none");
+})
+
+//업로드 다이얼로그
 
 $('#open_dlg_btn').on('click', () => {
     $("#write_dlg_background").css("display", "grid");

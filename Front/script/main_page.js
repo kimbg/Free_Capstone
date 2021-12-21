@@ -30,12 +30,14 @@ function AddItem(count) {
                 $('#content_bar').append(
                     `
                     <div id = "${data[i].user_id}/${data[i].number}" class = "post">
-                        <div id = "postuser">
-                            <img id = "profile" src = "/profile/${data[i].user_id}.jpg">
+                        <div class = "postuser">
+                            <div class = "filter">
+                                <img class = "profile" src = "/profile/${data[i].user_id}.jpg">
+                            </div>
                             ${data[i].user_id}
                         </div>
-                        <img id = "postimage" src = "/photo/${data[i].number}.jpg">
-                        <h3 id = "postcomment">
+                        <img class = "postimage" src = "/photo/${data[i].number}.jpg">
+                        <h3 class = "postcomment">
                             ${data[i].comment}
                         </h3>
                     </div>
@@ -48,10 +50,10 @@ function AddItem(count) {
     })
 }
 
-$(document).on('click', '#postimage', (e) => {
+$(document).on('click', '.postimage', (e) => {
     window.location.href='/page/post/'+ e.target.closest('.post').getAttribute('id').split('/')[1];
 })
 
-$(document).on('click', '#postuser', (e) => {
+$(document).on('click', '.postuser', (e) => {
     window.location.href='/page/user/'+ e.target.closest('.post').getAttribute('id').split('/', 1);
 })

@@ -61,7 +61,6 @@ router.post('/getpost', (req, res) => {
             res.send('noData');
         else
             res.send(results);
-        console.log(results)
     })
 })
 
@@ -82,6 +81,17 @@ router.post('/write', upload.single('myfile'), (req,res) => {
     res.redirect('/map/registerCoords/' + req.body.lat +'/' +  req.body.lng + '/' + req.body.comment1)//.json(req.body);
 })
 
-
+router.post('/get_myself', (req, res) => {
+    const sql = 'select * from user where id = ?'
+    mysql.query(sql, [req.session.passport.user.id], (err, results) => {
+        if(err)
+            res.send('noData');
+        else if(!results.length)
+            res.send('noData');
+        else
+            res.send(results);
+        console.log(results, req.session.passport.user.id)
+    })
+})
 
 module.exports = router

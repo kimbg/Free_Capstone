@@ -7,12 +7,12 @@ function content (data) {
         </div>  
         <div class="body">  
             <div class="img"> 
-                <img src="http://localhost:3000/photo/${data.number}.jpg" width="73" height="70"> 
+                <img src="/photo/${data.number}.jpg" width="73" height="70"> 
            </div>  
             <div class="desc">  
                 <div class="ellipsis">제주특별자치도 제주시 첨단로 242</div>  
                 <div class="jibun ellipsis">(우) 63309 (지번) 영평동 2181</div>  
-                <div><a href="http://localhost:3000/page/post/${data.number}" target="_blank" class="link">게시글 보기</a></div>  
+                <div><a href="/page/post/${data.number}" target="_blank" class="link">게시글 보기</a></div>  
             </div>  
         </div>  
     </div>     
@@ -71,7 +71,7 @@ $(function() {
     .done(function(data) {
         
         let name = data.user.user.name;
-        $("#profile_img").attr("src",`http://localhost:3000/profile/${name}.jpg`)
+        $("#profile_img").attr("src",`/profile/${name}.jpg`)
         $("#profile_name").text(name);
         
         for(var i = 0 ; i < data.DBdata.length; i++){                      
@@ -93,7 +93,7 @@ $(function() {
             if(marker.swit === undefined){ 
                 overlay.setMap(null);
                 marker.title = data.DBdata[i].number;
-                marker.picAddress = `http://localhost:3000/photo/${data.DBdata[i].number}.jpg`;
+                marker.picAddress = `/photo/${data.DBdata[i].number}.jpg`;
                 marker.comment =  data.DBdata[i].comment;
                 marker.username = data.DBdata[i].user_id;
             }

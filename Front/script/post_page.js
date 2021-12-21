@@ -15,12 +15,14 @@ function PostInfo(postid) {
             $('#content_bar').append(
                 `
                 <div id = "${data[0].user_id}/${data[0].number}" class = "post">
-                    <div id = "postuser">
-                        <img id = "profile" src = "/profile/${data[0].user_id}.jpg">
+                    <div class = "postuser">
+                        <div class = "filter">
+                            <img class = "profile" src = "/profile/${data[0].user_id}.jpg">
+                        </div>
                         ${data[0].user_id}
                     </div>
-                    <img id = "postimage" src = "/photo/${data[0].number}.jpg">
-                    <h3 id = "postcomment">
+                    <img class = "postimage" src = "/photo/${data[0].number}.jpg">
+                    <h3 class = "postcomment">
                         ${data[0].comment}
                     </h3>
                 </div>
@@ -39,17 +41,18 @@ function GetComment(postid)
         data : {'id' : postid}
     })
     .done((data) => {
-        console.log(data);
-
         if(data != 'noData') {
             for(let i = 0; i < data.length; i++) {
                 $('#content_bar').append(
                     `
-                    <div class = "box">
-                        <h2>
+                    <div id = "${data[i].user_id}/${i}" class = "post">
+                        <div class = "postuser">
+                            <div class = "filter">
+                                <img class = "profile" src = "/profile/${data[i].user_id}.jpg">
+                            </div>
                             ${data[i].user_id}
-                        </h2>
-                        <h3>
+                        </div>
+                        <h3 class = "postcomment">
                             ${data[i].comment}
                         </h3>
                     </div>
@@ -59,3 +62,7 @@ function GetComment(postid)
         }
     })
 }
+
+$(document).on('click', '.postuser', (e) => {
+    window.location.href='/page/user/'+ e.target.closest('.post').getAttribute('id').split('/', 1);
+})
