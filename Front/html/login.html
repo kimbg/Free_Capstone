@@ -1,35 +1,51 @@
 <!DOCTYPE html>
 <html lang="ko">
-    <head>
-        <meta charset="utf-8">                                                  <!--utf-8로 인코딩-->
-        <title> name </title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">    <!--브라우처 너비를 장치너비로-->
-        <link rel = "stylesheet" href = "/static/css/login.css">                 <!--css-->
-        <script src = "/static/jquery/jquery-3.6.0.min.js"></script>            <!--jquery-->
-        <!--<script defer src = "/static/script/login.js"></script>                  <!--javascript 사용 defer을 사용(가장 이상적인 방법)-->
-    </head>
-    <body>
-        <div id = "content">
-            <div id = "paint" >
-                <img id = "art-img" src = "/static/image/art.png"/>
-            </div>
-            <div id = "main">
-                <img id = "logo" src = "/static/image/ggot-logo.png"/>
-                <form id = "mainform" action = "login" method = "post">
-                    <input class = "inputbox" type = "text" name = "id" placeholder = "사용자 아이디" required />
-                    <input class = "inputbox" type = "password" name = "pw" placeholder = "비밀번호" required />
-                    <label id = "inputchk"><input type = "checkbox" name = "chk"/> 로그인 상태유지</label>
-                    <input id = "inputbtn" type = "submit" value = "로그인">
-                </form>
-                <div id = "sub">
-                    <a href="#"  id="joinhref">회원가입</a>
-                    <a href="#"  id = "find_id">계정찾기</a>
-                    <a href="#"  id = "find_pw">비밀번호 찾기</a>
-                </div>
-                <label id = "line">------------- 소셜 로그인 -------------</label>
-                <a id = "kakao" href = "/auth/kakao"><img id = "kakao-img" src = "/static/image/kakao_login_medium_wide.png"/></a>
-                <a id = "google" href = "/auth/google"><img id = "google-img" src = "/static/image/btn_google_signin_dark_normal_web@2x.png"/></a>
-            </div>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel = "stylesheet" href = "/static/css/login.css">                <!--css-->
+    <script src = "/static/jquery/jquery-3.6.0.min.js"></script>            <!--jquery-->
+    <script defer src = "/static/script/login.js"></script>                 <!--javascript 사용 defer을 사용(가장 이상적인 방법)-->
+</head>
+
+<body>
+    <div id="login_window">
+        <img class = "logo" src="/static/image/logo_white.png">
+        <form class = "form" action = "login" method = "POST">
+            <input class = "inputbox" type="text" name="id" placeholder="사용자 아이디" required />
+            <input class = "inputbox" type="text" name="pw" placeholder="비밀번호" required />
+            <input class = "inputbtn" type = "submit" value = "로그인">
+        </form>
+        <div id="url_row">
+            <a href = "#" id = "joinbtn" class = "url">회원가입</a>
+            <label>|</label>
+            <a href = "#" id = "find_id" class = "url">계정찾기</a>
+            <label>|</label>
+            <a href = "#" id = "find_pw" class = "url">비밀번호 찾기</a>
         </div>
-    </body>
-</html>
+        <div id="loginToAuth">
+            <p>- 소셜 로그인 -</p>
+            <a href = "/auth/kakao"><img src = "/static/image/kakao_280px.png"/></a>
+            <a href = "/auth/kakao"><img src = "/static/image/google_280px.png"/></a>
+        </div>
+    </div>
+    <div id="join_window">
+        <img class = "logo" src = "/static/image/logo_white.png">
+        <form id = "join_form" action = "join" method = "POST">
+            <input class = "inputbox" id = "id_input" type="text" name="id" placeholder="아이디 (휴대폰 번호 또는 이메일 주소)" required />
+            <input class = "inputbox" id = "pw_input" type="text" name="pw" placeholder="비밀번호" required />
+            <input class = "inputbox" id = "name_input" type="text" name="name" placeholder="이름" required />
+            <input class = "inputbox" id = "birth_input" type="text" name="birth" placeholder="생년월일 (YY/MM/DD)" required />
+            <h3>이용약관</h3>
+            <textarea id = "area" rows="7" readonly>여러분을 환영합니다.네이버 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 네이버 서비스의 이용과 관련하여 네이버 서비스를 제공하는 네이버 주식회사(이하 ‘네이버’)와 이를 이용하는 네이버 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 네이버 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.</textarea>
+            <div id = agree>
+                <input type="checkbox" name="login_stay" id="check" />
+                <label for="check"><span></span> 약관을 읽었으며, 이에 동의합니다</label>
+            </div>
+            <input class = "inputbtn" value = "회원가입" onclick="sendData();">
+        </form>
+        <button class = "inputbox" id = "return_bnt">로그인 화면으로 돌아가기</button>
+    </div>
+</body>

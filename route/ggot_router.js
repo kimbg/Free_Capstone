@@ -21,6 +21,12 @@ router.use('/page', (req, res, next) => {
     else
         next()
 })
+router.use('/map', (req, res, next) => {
+    if(!req.session.passport)
+        res.redirect('/login')
+    else
+        next()
+})
 router.use('/login', (req, res, next) => {
     if(req.session.passport)
         res.redirect('/page/main')

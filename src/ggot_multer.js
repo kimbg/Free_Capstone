@@ -15,7 +15,7 @@ const storage = multer.diskStorage({
             }
             else
             {
-                cb(null, "" + (results[0].number + 1) + "." + file.originalname.split('.')[1]);
+                cb(null, "" + (results[0].number + 1) + ".jpg");    //강제 jpg 형변환 추후 고려
             }
         })
     }

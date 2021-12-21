@@ -1,104 +1,196 @@
+* { 
+    text-decoration: none;
+    border : none;
+    margin: none;
+    outline : none;
+    color: black;
+}
+
+html, body {
+    background: rgb(224, 224, 224);
+    font-family:'나눔고딕';
+    font-size:10pt;
+}
+
 body {
-    margin: 0;
-}
-
-#content {
     height: 100vh;
-
-    display: grid;                          /*grid 적용 공부중*/
-    grid-template-areas: "paint . main .";
-    grid-template-columns: 6fr 20px 300px 2fr;
-}
-
-#paint {
-    grid-area: paint;
-    overflow: hidden;
-    background-color: rgb(255, 130, 125);
-}
-
-#main {
-    grid-area: main;
-    /*background-color: rgb(158, 158, 158);/**/
-
-    height: 100vh;
+    width: 100vw;
 
     display: grid;
-    grid-template-areas: "." "logo" "form" "menu" "line" "kakao" "google" ".";
-    grid-template-rows: 1fr 200px 140px 30px 30px 50px 50px 2fr;
+    grid-template-areas: ". . ." ". content ." ". . .";
+    grid-template-columns: 1fr 340px 1fr;
+    grid-template-rows: 1fr 9fr 1fr;
+
+    transition: 1s;
 }
 
-#logo {
+#login_window {
+    grid-area: content;
+
+    display: grid;
+    justify-content: stretch;
+    grid-template-areas: "." "logo" "form" "menu" "auth" ".";
+    grid-template-rows: 1fr 200px 120px 30px 120px 1fr;
+    row-gap: 10px;
+
+    border-radius: 10px;
+    background: white;
+    padding: 30px;
+
+    animation: fadein 2s;
+    -moz-animation: fadein 2s;
+    /* Firefox */
+    -webkit-animation: fadein 2s;
+    /* Safari and Chrome */
+    -o-animation: fadein 2s;
+    /* Opera */
+}
+
+.logo {
     grid-area: logo;
-    margin: auto;
     width: 40%;
+    margin: auto;
 }
 
-#mainform {
+.form {
     grid-area: form;
-    height: 140px;
-    width : 100%;
-    /*background-color: rgb(0, 255, 115);/**/
     display: grid;
     justify-content: stretch;
 }
 
 .inputbox {
-    height: 30px;
+    margin-bottom: 5px;
     background: rgb(233, 233, 233);
-    margin: 1px;
     border: none;
+    padding-left: 5px;
     border-radius: 10px;
 }
 
-#inputchk {
-    height: 30px;
-    margin: 1px;
-}
-
-#inputbtn {
-    height: 30px;
-    background: rgb(228, 112, 112);
-    margin: 1px;
+.inputbtn {
+    cursor: pointer;
+    color: white;
+    background: rgb(250, 122, 129);
     border: none;
     border-radius: 10px;
+    text-align: center;
 }
 
-#sub {
+#url_row {
     grid-area: menu;
     text-align: center;
 }
 
-#line {
-    grid-area: line;
+#loginToAuth {
+    grid-area: auth;
     text-align: center;
 }
 
-#kakao {
-    grid-area: kakao;
+/*회원가입*/
+
+#join_window {
+    grid-area: content;
+
+    display: none;
+    justify-content: stretch;
+    grid-template-areas: "." "logo" "form" "return" ".";
+    grid-template-rows: 1fr 200px 450px 50px 1fr;
+    row-gap: 10px;
+
+    border-radius: 10px;
+    background: white;
+    padding: 30px;
+
+    animation: fadein 2s;
+    -moz-animation: fadein 2s;
+    /* Firefox */
+    -webkit-animation: fadein 2s;
+    /* Safari and Chrome */
+    -o-animation: fadein 2s;
+    /* Opera */
 }
 
-#google{
-    grid-area: google;
+#join_form {
+    grid-area: form;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr 40px 140px 40px 1fr;
+    justify-content: stretch;
 }
 
-#kakao-img {
+#area {
+    background: rgb(224, 224, 224);
     width: 100%;
+    border-radius: 10px;
+    font-family:'나눔고딕';
+    font-size:10pt;
+    resize: none;
 }
 
-#google-img {
-    width: 100%;
+span {
+    position: relative;
+    top: 5px;
 }
 
-#art-img {
-    height: 100%;
+input[type="checkbox"] {
+    display: none;
 }
 
-@media screen and (max-width: 900px) {      /*넓이가 (900px 보다)좁으면*/
-    #content {
-        grid-template-areas: ". main .";
-        grid-template-columns: 1fr 300px 1fr;
+input[type="checkbox"] + label span {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    background-image: url('/static/image/checkbox_round_unchecked.png');
+}
+
+input[type="checkbox"]:checked + label span {
+    background-image: url('/static/image/checkbox_round_checked.png');
+}
+
+#return_bnt {
+    grid-area: return;
+}
+
+@media screen and (max-width: 600px) {      /*넓이가 (900px 보다)좁으면*/
+    body {
+        background: white;
     }
-    #paint {
-        display: none;
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes fadein {
+    /* Firefox */
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadein {
+    /* Safari and Chrome */
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@-o-keyframes fadein {
+    /* Opera */
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
     }
 }
