@@ -11,26 +11,22 @@ $(function() {
     console.log('lng : ',lng)
 
     
-    var mapOption;
-    let newcoords = new kakao.maps.LatLng(lng,lat);
-    if(lat != 0 && lng != 0) 
-    {
-         mapOption = { 
-            center: new kakao.maps.LatLng(lng,lat), // 지도의 중심좌표
-            level: 3 // 지도의 확대 레벨
-        };
-    }
-    else //사진에 메타데이터 없는경우
-    {
-        lat = 35.24872579785369;
-        lng = 128.9028173515892;
-        mapOption = { 
-            center: new kakao.maps.LatLng(lng,lat), // 지도의 중심좌표
-            level: 3 // 지도의 확대 레벨
-        };
-    }
-     console.log('mapOption : ',mapOption);
+    let newcoords;
+    var latlng;
 
+    if(lat != 0 && lng != 0)   
+        newcoords = new kakao.maps.LatLng(lng,lat);
+    else { //사진에 메타데이터 없는경우
+        newcoords = new kakao.maps.LatLng(35.24872579785369,128.9028173515892);        
+        latlng = newcoords;           
+    } 
+    
+    console.log(newcoords);
+     
+    var  mapOption = { 
+        center: newcoords, // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };
     var mapContainer = document.getElementById('map'); // 지도를 표시할 div 
     
 
@@ -41,11 +37,11 @@ $(function() {
     }); 
     marker.setMap(map);
 
-    var latlng;
+    
     kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
     
         latlng = mouseEvent.latLng;         
-
+        console.log(latlng);
 
         marker.setPosition(latlng);
         
@@ -60,14 +56,14 @@ $(function() {
 
     function submitCoords() {
         
-        if(lat != 0 && lng != 0){
-            alert("확인");
+        if(newcoords.La != 0 && newcoords.Ma != 0){
+            alert("게시물이 등록되었습니다!");
             $.ajax({
                 url : '/map/submitCoords',
                 type : 'POST',
                 data : {
-                    lat : lat,
-                    lng : lng,
+                    lat : newcoords.La,
+                    lng : newcoords.Ma,
                 }
             })           
             .done(function(response) {
