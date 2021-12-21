@@ -3,16 +3,16 @@ function content (data) {
      <div class="wrap">  
      <div class="info">  
         <div class="title">  
-            카카오${data.num}              
+            사진이름 : ${data.number}              
         </div>  
         <div class="body">  
             <div class="img"> 
-                <img src="http://localhost:3000/image/${data.num}" width="73" height="70"> 
+                <img src="http://localhost:3000/photo/${data.number}.jpg" width="73" height="70"> 
            </div>  
             <div class="desc">  
                 <div class="ellipsis">제주특별자치도 제주시 첨단로 242</div>  
                 <div class="jibun ellipsis">(우) 63309 (지번) 영평동 2181</div>  
-                <div><a href="https://www.kakaocorp.com/main" target="_blank" class="link">게시글 보기</a></div>  
+                <div><a href="http://localhost:3000/page/post/${data.number}" target="_blank" class="link">게시글 보기</a></div>  
             </div>  
         </div>  
     </div>     
@@ -60,45 +60,59 @@ kakao.maps.event.addListener(map, 'idle', function() {
     searchAddrFromCoords(map.getCenter(), displayCenterInfo);
 });
 
-
+let overlays = [];
 
 
 $(function() {
     $.ajax({
-        url : 'map/getMarkers',
+        url : '/map/getMarkers',
         type : 'POST'
     })
     .done(function(data) {
-        for(var i = 0 ; i < data.length; i++){                      
-            
+        
+        let name = data.user.user.name;
+        $("#profile_img").attr("src",`http://localhost:3000/profile/${name}.jpg`)
+        $("#profile_name").text(name);
+        
+        for(var i = 0 ; i < data.DBdata.length; i++){                      
+            console.log("받은 데이터",i);
+            console.log(data.DBdata[i]);
             let marker = new kakao.maps.Marker({
                 map : map,
-                position : new kakao.maps.LatLng(data[i].lat,data[i].lng),
-                swit : true,
+                position : new kakao.maps.LatLng(data.DBdata[i].lat,data.DBdata[i].lng),
             })
 
             let overlay = new kakao.maps.CustomOverlay({
-                content: content(data[i]),
+                content: content(data.DBdata[i]),
                 map: map,
                 position: marker.getPosition()       
             });
+            
 
-            //얘는 처음부터 부연설명 창이 뜨니까 난잡해서 없애는 코드
+            //얘는 처음부터 부연설명 창이 뜨니까 난잡해서 없애고, 기본적인 값 초기화
             if(marker.swit === undefined){ 
                 overlay.setMap(null);
-                marker.swit = false;
+                marker.title = data.DBdata[i].number;
+                marker.picAddress = `http://localhost:3000/photo/${data.DBdata[i].number}.jpg`;
+                marker.comment =  data.DBdata[i].comment;
+                marker.username = data.DBdata[i].user_id;
             }
 
+            overlays.push(overlay);
+
             kakao.maps.event.addListener(marker,'click',function() {
-                if(marker.swit) {
-                    overlay.setMap(null);
-                }
-                else if(marker.swit == false){
-                    overlay.setMap(map);
-                }
-                marker.swit = !marker.swit;
-            })
-        }        
+                setting(marker);
+                overlay.setMap(map);
+            })            
+        }
     })
 })
 
+function setting(marker) {
+    $("#mainName").text(marker.title);
+    $("#mainPhoto").attr("src",marker.picAddress);
+    $("#username").text(marker.username);
+    for(let i = 0 ; i < overlays.length; i++){
+        overlays[i].setMap(null);
+    }
+}
