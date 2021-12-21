@@ -56,3 +56,44 @@ function sendData() {
        }
     })
 }
+
+$('#find_pw').on('click', () => {
+    $('#login_window').css("display", "none");
+    $('#find_window').css("display", "grid");
+})
+
+$('#find_id').on('click', () => {
+    $('#login_window').css("display", "none");
+    $('#find_window').css("display", "grid");
+})
+
+$('#return_find_login_bnt').on('click', () => {
+    $('#login_window').css("display", "grid");
+    $('#find_window').css("display", "none");
+})
+
+$('#find_btn').on('click', () => {
+    let name_val = document.getElementById("find_by_name").value;
+    let birth_val = document.getElementById("find_by_birth").value;
+
+    $.ajax({
+        url : '/login/find_id',
+        type : 'POST',
+        data : {
+            name : name_val,
+            birth : birth_val
+        }
+    })
+    .done((data) => {
+        console.log(data);
+       if(data == 'noData')
+       {
+           alert("찾을 수 없습니다!");
+       }
+       else
+       {
+           alert("id 는 " + data[0].id + "이고 비밀번호는 " + data[0].password + "입니다")
+           window.location.reload();
+       }
+    })
+})

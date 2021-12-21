@@ -15,7 +15,7 @@ router.post('/getMarkers',(req,res)=> {
                 console.log("err1")                
             }
             else if(!result[0]){
-                console.log("getMarkers err2");
+                console.log("err2");
             }
 
             let sendMessage = {

@@ -68,15 +68,14 @@ $(function() {
         url : '/map/getMarkers',
         type : 'POST'
     })
-    .done(function(data) {
+    .done((data) => {
         
         let name = data.user.user.name;
         $("#profile_img").attr("src",`/profile/${name}.jpg`)
         $("#profile_name").text(name);
         
-        for(var i = 0 ; i < data.DBdata.length; i++){                      
-            console.log("받은 데이터",i);
-            console.log(data.DBdata[i]);
+        for(var i = 0 ; i < data.DBdata.length; i++){
+
             let marker = new kakao.maps.Marker({
                 map : map,
                 position : new kakao.maps.LatLng(data.DBdata[i].lat,data.DBdata[i].lng),
@@ -87,7 +86,6 @@ $(function() {
                 map: map,
                 position: marker.getPosition()       
             });
-            
 
             //얘는 처음부터 부연설명 창이 뜨니까 난잡해서 없애고, 기본적인 값 초기화
             if(marker.swit === undefined){ 
@@ -105,11 +103,17 @@ $(function() {
                 overlay.setMap(map);
             })            
         }
+
+        $(".post_comment").text(data.DBdata[0].comment);
+        $("#target_img").attr("src", `/profile/${data.DBdata[0].user_id}.jpg`);
+        $("#mainPhoto").attr("src",`/photo/${data.DBdata[0].number}.jpg`);
+        $("#username").text(data.DBdata[0].user_id);
     })
 })
 
 function setting(marker) {
-    $("#mainName").text(marker.title);
+    $(".post_comment").text(marker.comment);
+    $("#target_img").attr("src", `/profile/${marker.username}.jpg`);
     $("#mainPhoto").attr("src",marker.picAddress);
     $("#username").text(marker.username);
     for(let i = 0 ; i < overlays.length; i++){

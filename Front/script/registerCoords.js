@@ -14,7 +14,7 @@ $(function() {
     let newcoords;
     var latlng;
 
-    if(lat != 0 && lng != 0)   
+    if(lat != 0 || lng != 0)   
         newcoords = new kakao.maps.LatLng(lng,lat);
     else { //사진에 메타데이터 없는경우
         newcoords = new kakao.maps.LatLng(35.24872579785369,128.9028173515892);        
@@ -56,14 +56,14 @@ $(function() {
 
     function submitCoords() {
         
-        if(newcoords.La != 0 && newcoords.Ma != 0){
+        if(latlng.getLat() != 0 && latlng.getLng() != 0){
             alert("게시물이 등록되었습니다!");
             $.ajax({
                 url : '/map/submitCoords',
                 type : 'POST',
                 data : {
-                    lat : newcoords.La,
-                    lng : newcoords.Ma,
+                    lat : latlng.getLat(),
+                    lng : latlng.getLng(),
                 }
             })           
             .done(function(response) {

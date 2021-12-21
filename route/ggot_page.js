@@ -101,4 +101,45 @@ router.post('/get_myself', (req, res) => {
     })
 })
 
+router.post('/write_comment/:id', (req, res) => {
+    const sql = 'INSERT INTO comment (number, user_id, comment) VALUES (?, ?, ?)'
+    console.log(req)
+    mysql.query(sql, [parseInt(req.params.id), req.session.passport.user.id, req.body.comment], (err, results) => {
+        if(err)
+            console.log(err)
+        else
+            res.redirect(`/page/post/${req.params.id}`)
+    })
+})
+
+router.post('/get_friend', (req, res) => {
+    const sql = 'select * from friend where user_id = ?'
+    mysql.query(sql, [req.session.passport.user.id], (err, results) => {
+        if(err)
+            res.send('noData');
+        else if(!results.length)
+            res.send('noData');
+        else
+            res.send(results);
+    })
+})
+
+router.post('/add_friend', (req, res) => {
+    const sql = 'INSERT INTO friend (user_id, friend_id) VALUES(?, ?)'
+
+    console.log(req)
+    mysql.query(sql, [req.session.passport.user.id, req.body.friend], (err, results) => {
+        if(err)
+            console.log(err)
+        else if(!results.length)
+            res.send('noData');
+        else
+            res.send(results);
+    })
+})
+
+router.get('/profile', (req, res) => {
+    res.sendFile('/profile_edit.html', {root : `Front/html`})
+})
+
 module.exports = router

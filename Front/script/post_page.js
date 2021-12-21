@@ -26,10 +26,16 @@ function PostInfo(postid) {
                         ${data[0].comment}
                     </h3>
                 </div>
+
+                <div class = "add_comment_btn" id = "add_comment_btn/${data[0].number}">
+                    <img class = "comment_img" src = "/static/image/comment.png">
+                    ADD COMMENT
+                </div>
                 `
             )
+
+            GetComment(postid)
         }
-        GetComment(postid)
     })
 }
 
@@ -65,4 +71,35 @@ function GetComment(postid)
 
 $(document).on('click', '.postuser', (e) => {
     window.location.href='/page/user/'+ e.target.closest('.post').getAttribute('id').split('/', 1);
+})
+
+$(document).on('click', '.add_comment_btn', (e) => {
+    console.log($(location).attr('href').split('/')[5])
+    $ ("#main").append(
+        `
+        <div id = "comment_dlg_background">
+            <div id = "comment_dlg">
+                <img id = "close_comment_dlg_btn" src = "/static/image/xbox.png">
+                <span></span>
+                <textarea id = "comment_textarea" placeholder = "글을 입력해주세요" name = "comment1"></textarea>
+                <img id = "comment_btn" src = "/static/image/comment.png">
+            </div>
+        </div>
+        `
+    )
+})
+
+$(document).on('click', '#close_comment_dlg_btn', (e) => {
+    $(comment_dlg_background).remove()
+})
+
+$(document).on('click', '#comment_btn', (e) => {
+    $.ajax({
+        url : `/page/write_comment/${$(location).attr('href').split('/')[5]}`,
+        type : 'POST',
+        data : {'comment' : $(comment_textarea).val()}
+    })
+    .done(() => {
+        location.reload();
+    })
 })

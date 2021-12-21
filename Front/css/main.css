@@ -40,6 +40,8 @@ body {
 
 #side {
     grid-area: side;
+
+    padding: 10px;
     background: rgb(255, 255, 255);
 }
 
@@ -85,10 +87,28 @@ body {
     font-size: 15px;
 }
 
+/*친구*/
+
+.friend {
+    border-radius: 40px;
+    background-color: #9b9b9b;
+    margin-bottom: 5px;
+}
+.friend > div {
+    height: 30px;
+}
+.friend > div > div {
+    height: 30px;
+}
+.friend > div > div > img {
+    height: 40px;
+    width: 50px;
+}
+
 /*메뉴*/
 
 #menu_dlg {
-    width: 200px;
+    width: 150px;
     height: 200px;
     position: absolute;
     top: 62px;

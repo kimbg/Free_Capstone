@@ -11,16 +11,21 @@
 <body>
     <div class = "container">
         <div id = "toolbar">
-            <img src = "/photo/logo_white_hori.png" id = "logo_img">
-            <div id = "right_div">
-                <img src = "http://placehold.it/45x45" id = "profile_img">  
-                <span id = "profile_name"></span>
-            </div>          
+            <a href = "/"><img src = "/static/image/logo_white_hori.png" id = "logo_img"></a>
+            <span id = "profile_name" class="right"></span>
+            <div class="filter">
+                <img src = "http://placehold.it/45x45" class = "profile" id="profile_img">  
+            </div>
         </div>
         <div id = "item1">
+            <div class="post_head">
+                <div class="filter">
+                    <img src = "http://placehold.it/45x45" class = "profile" id = "target_img">
+                </div>
+                <div id = "username">name</div>
+            </div>
             <img id = "mainPhoto" src = "http://placehold.it/45x45">
-            <div id = "mainName">이 사진의 제목입니다</div>
-            <div id = "username">사용자 이름이 입력되는 곳입니다.</div>
+            <textarea class = "post_comment" cols="30" rows="10">내용</textarea>
         </div>       
         <div class = "map_wrap">
             <div id="map"></div>

@@ -50,10 +50,3 @@ function AddItem(count) {
     })
 }
 
-$(document).on('click', '.postimage', (e) => {
-    window.location.href='/page/post/'+ e.target.closest('.post').getAttribute('id').split('/')[1];
-})
-
-$(document).on('click', '.postuser', (e) => {
-    window.location.href='/page/user/'+ e.target.closest('.post').getAttribute('id').split('/', 1);
-})

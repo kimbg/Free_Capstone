@@ -29,11 +29,12 @@ function UserInfo(user) {
         if(data != 'noData') {
             $('#content_bar').append(
                 `
-                <div class = "userpost">
-                    <img class = "postimage" src = "/profile/${data[0].id}.jpg">
-                    <h3 class = "postcomment">
-                        ${data[0].id}
-                    </h3>
+                <div class = "big_postuser" id = "big_postuser/${data[0].id}">
+                    <div class = "big_filter">
+                        <img class = "profile" src = "/profile/${data[0].id}.jpg">
+                    </div>
+                    ${data[0].id}
+                    <img class = "add_friend_btn" src = "/static/image/postadd.png">
                 </div>
                 `
             )
@@ -75,6 +76,16 @@ function AddItem(count) {
     })
 }
 
-$(document).on('click', '.postimage', (e) => {
-    window.location.href='/page/post/'+ e.target.closest('.post').getAttribute('id').split('/')[1];
+$(document).on('click', '.add_friend_btn', (e) => {
+
+    const target = e.target.closest('.big_postuser').getAttribute('id').split('/')[1]
+    
+    $.ajax({
+        url : '/page/add_friend',
+        type : 'POST',
+        data : {'friend' : target}
+    })
+    .done((data) => {
+        location.reload();
+    })
 })

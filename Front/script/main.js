@@ -32,6 +32,27 @@ $(document).ready(() => {
     .done((data) => {
         $("#open_menu_btn").attr("src", `/profile/${data[0].id}.jpg`);
     })
+
+    $.ajax({
+        url : '/page/get_friend',
+        type : 'POST',
+    })
+    .done((data) => {
+        for(let i = 0; i < data.length; i++) {
+            $('#side').append(
+                `
+                <div id = "${data[i].friend_id}/" class = "post">
+                    <div class = "postuser">
+                        <div class = "filter">
+                            <img class = "profile" src = "/profile/${data[i].friend_id}.jpg">
+                        </div>
+                        ${data[i].friend_id}
+                    </div>
+                </div>
+                `
+            )
+        }
+    })
 })
 
 //메뉴 다이얼로그
@@ -133,4 +154,12 @@ function updateThumbnail(file) {
 
 $('#fileselector').on("change", (e) => {
     updateThumbnail(e.target.files)
+})
+
+$(document).on('click', '.postimage', (e) => {
+    window.location.href='/page/post/'+ e.target.closest('.post').getAttribute('id').split('/')[1];
+})
+
+$(document).on('click', '.postuser', (e) => {
+    window.location.href='/page/user/'+ e.target.closest('.post').getAttribute('id').split('/', 1);
 })
