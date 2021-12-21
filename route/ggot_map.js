@@ -29,13 +29,14 @@ router.post('/getMarkers',(req,res)=> {
     })
 })
 
-router.get('/registerCoords',(req,res)=> {
+router.get('/registerCoords/:id1/:id2/:id3',(req,res)=> {
     res.sendFile('/registerCoords.html', {root : `front/html`})
 })
 
 router.post('/submitCoords',(req,res)=> {
     mysql.getConnection((err,conn)=> {
-        conn.query(`insert into markers (lat,lng) values(?,?)`,[req.body.lat,req.body.lng],(err,result)=> {
+        let sql = "insert into noticeBoard (user_id,comment,lat,lng) values(?,?,?,?)";
+        conn.query(sql,[req.session.passport.user.id,req.body.comment,req.body.lat,req.body.lng],(err,result)=> {
             if(err){
                 console.log("err1");                
                 console.log(err);

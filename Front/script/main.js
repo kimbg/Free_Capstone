@@ -72,6 +72,35 @@ function updateThumbnail(file) {
         reader.readAsDataURL(file[0]);
         reader.onload = () => {
             $('#thumnail').css("backgroundImage", `url('${reader.result}')`);
+            EXIF.getData(file[0], async () => {
+                const tags = await EXIF.getAllTags(file[0]);
+                latitude = 0;
+                longitude = 0;
+               try
+               {
+                    latitu1 = tags.GPSLatitude[0].valueOf();
+                    latitu2 = tags.GPSLatitude[1].valueOf();
+                    latitu3 = tags.GPSLatitude[2].valueOf();
+    
+                    longitu1 = tags.GPSLongitude[0].valueOf();
+                    longitu2 = tags.GPSLongitude[1].valueOf();
+                    longitu3 = tags.GPSLongitude[2].valueOf();
+    
+                    latitude = await latitu1 + latitu2 / 60 + latitu3 / 3600;
+                    longitude = await longitu1 + longitu2 / 60 + longitu3 / 3600;
+               }
+               catch (err)
+               {
+                    console.log(err);      
+               }
+               finally {
+                   $("#lat").text(latitude);
+                   $("#lng").text(longitude);
+                   console.log('lat : ',$("#lat").text());
+                   console.log('lng : ',$("#lng").text());
+
+               }
+            });
         }
     }
     else {

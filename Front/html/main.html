@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">    <!--브라우처 너비를 장치너비로-->
         <link rel = "stylesheet" href = "/static/css/main.css">                 <!--css-->
         <script src = "/static/jquery/jquery-3.6.0.min.js"></script>            <!--jquery-->
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/exif-js"></script>  <!--메타 데이터 가져오기-->
         <script defer src = "/static/script/main.js"></script>                  <!--javascript 사용 defer을 사용(가장 이상적인 방법)-->
     </head>
     <body>
@@ -21,6 +22,9 @@
                     <textarea placeholder = "글을 입력해주세요" name = "comment1"></textarea>
                     <textarea placeholder = "사진의 장소는 어디인가요?" name = "comment2"></textarea>
                     <button type = "submit">글쓰기</button>
+                    <textarea  id = "lat" name = "lat"></textarea>
+                    <textarea  id = "lng" name = "lng"></textarea>
+                    
                 </form>
             </dialog>
         </div>

@@ -79,14 +79,7 @@ router.post('/getcomments', (req, res) => {
 })
 
 router.post('/write', upload.single('myfile'), (req,res) => {
-    const sql = 'INSERT INTO noticeboard (user_id, comment) VALUES (?, ?)'
-    mysql.query(sql, [req.session.passport.user.id ,req.body.comment1], (err, results) => {
-        if (err)
-        {
-            console.log(err);
-        }
-    })
-    res.redirect('/');
+    res.redirect('/map/registerCoords/' + req.body.lat +'/' +  req.body.lng + '/' + req.body.comment1)//.json(req.body);
 })
 
 

@@ -90,6 +90,14 @@ body {
     background-color: #818181;
 }
 
+#lat{
+    display: none;
+}
+
+#lng {
+    display : none;
+}
+
 @media screen and (max-width: 900px) {      /*넓이가 (900px 보다)좁으면 사이드바 삭제*/
     #content {
         grid-template-areas: "header header header" ". main .";   
