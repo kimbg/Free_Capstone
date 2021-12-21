@@ -78,7 +78,14 @@ router.post('/getcomments', (req, res) => {
 })
 
 router.post('/write', upload.single('myfile'), (req,res) => {
-    res.redirect('/map/registerCoords/' + req.body.lat +'/' +  req.body.lng + '/' + req.body.comment1)//.json(req.body);
+    const sql = "insert into noticeBoard (user_id,comment) values(?,?)";
+    mysql.query(sql,[req.session.passport.user.id,req.body.comment1],(err,result)=> {
+        if(err)
+            console.log(err);
+        if(!result.length)
+            console.log('sql insert successful at /write');        
+    });
+    res.redirect('/map/registerCoords/' + req.body.lat +'/' +  req.body.lng)//.json(req.body);
 })
 
 router.post('/get_myself', (req, res) => {

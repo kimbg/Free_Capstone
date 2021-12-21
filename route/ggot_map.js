@@ -15,7 +15,7 @@ router.post('/getMarkers',(req,res)=> {
                 console.log("err1")                
             }
             else if(!result[0]){
-                console.log("err2");
+                console.log("getMarkers err2");
             }
 
             let sendMessage = {
@@ -29,18 +29,27 @@ router.post('/getMarkers',(req,res)=> {
     })
 })
 
-router.get('/registerCoords/:id1/:id2/:id3',(req,res)=> {
+router.get('/registerCoords/:id1/:id2',(req,res)=> {
     res.sendFile('/registerCoords.html', {root : `front/html`})
 })
 
 router.post('/submitCoords',(req,res)=> {
+    
     mysql.getConnection((err,conn)=> {
-        let sql = "insert into noticeBoard (user_id,comment,lat,lng) values(?,?,?,?)";
-        conn.query(sql,[req.session.passport.user.id,req.body.comment,req.body.lat,req.body.lng],(err,result)=> {
-            if(err){
-                console.log("err1");                
+        let sql = `SELECT number FROM noticeboard where user_id = ? ORDER BY date DESC LIMIT 1;`
+        conn.query(sql,[req.session.passport.user.id],(err,result)=> {
+            if(err)
                 console.log(err);
-            }           
+            else if(!result.length)
+                console.log("no data Err");
+
+            sql = `UPDATE noticeboard SET lat = ?, lng = ? WHERE number = ?`;
+            conn.query(sql,[req.body.lat,req.body.lng,result[0].number],(err,result2)=> {
+                if(err)
+                    console.log("double query in err1 at /submitCoords");
+                if(!result2[0])
+                    console.log("update successfully");
+            });
             conn.release();
             
         })
