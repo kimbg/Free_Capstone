@@ -3,61 +3,49 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <script src = "../jquery/jquery-3.6.0.min.js"></script>
-    <!--css파일 불러오기-->
-    <link rel = "stylesheet" href = "/css/login.css">
+    <link rel = "stylesheet" href = "/static/css/login.css">                <!--css-->
+    <script src = "/static/jquery/jquery-3.6.0.min.js"></script>            <!--jquery-->
+    <script defer src = "/static/script/login.js"></script>                 <!--javascript 사용 defer을 사용(가장 이상적인 방법)-->
 </head>
 
 <body>
-    <div id="login">
-        <form id = "loginform" action = "login" method = "POST">
-            <div  class="center photo"><img src="http://placehold.it/150x150"></div>
-            <input type="text" name = "id" placeholder="사용자 아이디" required />
-            <input type="text" name = "pw" placeholder="비밀번호" required />
-            <div id="row_1" class="row">
-            <input type="checkbox" name = "login_stay" id="chkbtn" /><label for="chkbtn">로그인 상태유지</span>
-            </div>
-            <button type="submit" id="loginbt" onclick="btn();">로그인</button>
-            <div id="row_2" class="row">
-                <a href="#"  id="joinhref">회원가입</a>
-                <a href="#"  id = "find_id">계정찾기</a>
-                <a href="#"  id = "find_pw">비밀번호 찾기</a>
-            </div>
+    <div id="login_window">
+        <img class = "logo" src="/static/image/logo_white.png">
+        <form class = "form" action = "login" method = "POST">
+            <input class = "inputbox" type="text" name="id" placeholder="사용자 아이디" required />
+            <input class = "inputbox" type="text" name="pw" placeholder="비밀번호" required />
+            <input class = "inputbtn" type = "submit" value = "로그인">
         </form>
-    </div>
-
-    <div id="join_window">
-        <button type = "button" class = "close">X</button>
-        <form id = "joinform" action = "join" method = "POST">
-            <div class = "photo"><img src = "http://placehold.it/50x50"></div>
-        <input type = "text" name = "id" placeholder="아이디(휴대폰 번호 또는 이메일 주소)" required/>
-        <input type = "text" name = "pw" placeholder="비밀번호" required/>
-        <input type = "text" name = "name" placeholder="이름" required/>
-        <input type = "text" name = "birth" placeholder="생년월일(YY/MM/DD)" required/>
-        <div class = "row" id = "yak">약관</div>
-        <textarea id = "area" rows="5" readonly>회원가입 약관 스크롤 바 형식 어쩌구 저쩌구 </textarea>
-        <div class = "row">
-            <input type = "checkbox" id = "yakgwanbtn"  required>
-            <label for = "yakgwanbtn">동의합니다.</label>
+        <div id="url_row">
+            <a href = "#" id = "joinbtn" class = "url">회원가입</a>
+            <label>|</label>
+            <a href = "#" id = "find_id" class = "url">계정찾기</a>
+            <label>|</label>
+            <a href = "#" id = "find_pw" class = "url">비밀번호 찾기</a>
         </div>
-        <button type = "submit" id = "memberjoinbtn">회원가입</button>
+        <div id="loginToAuth">
+            <p>- 소셜 로그인 -</p>
+            <a href = "/auth/kakao"><img src = "/static/image/kakao_280px.png"/></a>
+            <a href = "/auth/google"><img src = "/static/image/google_280px.png"/></a>
+        </div>
+    </div>
+    <div id="join_window">
+        <img class = "logo" src = "/static/image/logo_white.png">
+        <form id = "join_form" action = "join" method = "POST">
+            <input class = "inputbox" id = "id_input" type="text" name="id" placeholder="아이디 (휴대폰 번호 또는 이메일 주소)" required />
+            <input class = "inputbox" id = "pw_input" type="text" name="pw" placeholder="비밀번호" required />
+            <input class = "inputbox" id = "name_input" type="text" name="name" placeholder="이름" required />
+            <input class = "inputbox" id = "birth_input" type="text" name="birth" placeholder="생년월일 (YY/MM/DD)" required />
+            <h3>이용약관</h3>
+            <textarea id = "area" rows="7" readonly>여러분을 환영합니다.네이버 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 네이버 서비스의 이용과 관련하여 네이버 서비스를 제공하는 네이버 주식회사(이하 ‘네이버’)와 이를 이용하는 네이버 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 네이버 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.</textarea>
+            <div id = agree>
+                <input type="checkbox" name="login_stay" id="check" />
+                <label for="check"><span></span> 약관을 읽었으며, 이에 동의합니다</label>
+            </div>
+            <input class = "inputbtn" value = "회원가입" onclick="sendData();">
         </form>
+        <button class = "inputbox" id = "return_bnt">로그인 화면으로 돌아가기</button>
     </div>
-    <div id = "find_id_window">
-        <button type = "button" class = "close">X</button>
-        아이디 찾기 창
-    </div>
-    <div id = "find_pw_window">
-        <button type = "button" class = "close">X</button>
-        비밀번호 찾기 창
-    </div>
-
-
-    <!--js 파일 불러오기!-->
-    <script type = "text/javascript" src = "/js/login.js"></script>
 </body>
-
-</html>

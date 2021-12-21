@@ -1,0 +1,193 @@
+body {
+    margin: 0;
+    background: rgb(224, 224, 224);
+}
+
+#content {
+    height: 100vh;
+
+    display: grid;                          /*grid 적용 공부중*/
+    grid-template-areas: "header header header header" ". main side .";
+    grid-template-columns: 1fr 600px 300px 1fr;
+    grid-template-rows: 60px 1fr;
+    grid-gap: 2px;
+}
+
+#header {
+    grid-area: header;
+
+    display: grid;
+    grid-template-columns: 1fr 60px;
+
+    align-items: center;
+    background: rgb(255, 255, 255);
+}
+
+#main {
+    grid-area: main;
+
+    overflow-y: scroll;
+    background: rgb(247, 247, 247);
+}
+::-webkit-scrollbar {
+    display: none;
+}
+
+#content_bar {
+    display: grid;
+    grid-gap: 10px;
+}
+
+#side {
+    grid-area: side;
+    background: rgb(255, 255, 255);
+}
+
+#home_btn {
+    height: 50px;
+}
+
+/*프로필*/
+
+.profile {
+    width: 100%;
+    height: 100%;
+}
+.filter {
+    width: 50px;
+    height: 50px;
+    border-radius: 60%;
+    overflow: hidden;
+}
+
+/*포스트*/
+
+.post {
+    background: rgb(255, 255, 255);
+    box-shadow: 2px 2px 2px 2px rgb(209, 209, 209);
+}
+
+.postuser {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    grid-gap: 10px;
+
+    padding: 10px;
+    font-size: 30px;
+}
+
+.postimage {
+    width: 100%;
+}
+
+.postcomment {
+    padding: 10px;
+    font-size: 15px;
+}
+
+/*메뉴*/
+
+#menu_dlg {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    top: 62px;
+    right: 0px;
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    box-shadow: 2px 2px 2px 2px rgb(209, 209, 209);
+    background-color: rgb(255, 255, 255);
+}
+
+/*다이얼로그*/
+
+#close_dlg_btn {
+    position: fixed;
+    height: 30px;
+    width: 30px;
+}
+
+#write_dlg_background {
+    position: fixed;
+    height: 100vh;
+    width : 100vw;
+    display: none;
+    place-items: center;
+    background-color: rgba(65, 65, 65, 0.5);
+    z-index : 10;
+}
+
+#write_dlg {
+    padding: 5px;
+    width : 50%;
+    height : 50%;
+
+    cursor : pointer;
+    
+    border-radius : 10px;
+    border : 4px dashed #009578;
+
+    display: grid;
+    align-items: stretch;
+    justify-items: stretch;
+}
+
+#drop_box {
+    display: grid;
+    place-items: center;
+}
+
+#upload_form {
+    display: none;
+    grid-template-rows: 2fr 1fr 30px;
+}
+
+#fileselector {
+    display: none;
+}
+
+#thumnail {
+    display: none;
+    width : 90%;
+    height : 90%;
+    border-radius : 10px;
+    background-color: #818181;
+}
+
+#lat{
+    display: none;
+}
+
+#lng {
+    display : none;
+}
+
+@media screen and (max-width: 900px) {      /*넓이가 (900px 보다)좁으면 사이드바 삭제*/
+    #content {
+        grid-template-areas: "header header header" ". main .";   
+        grid-template-columns: 1fr 600px 1fr;
+    }
+
+    #side {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 600px) {      /*넓이가 (600px 보다) 좁으면 main 가로 조절*/
+    #content {
+        grid-template-areas: "header" "main";   
+        grid-template-columns: 1fr;
+    }
+
+    #side {
+        display: none;
+    }
+
+    #write_dlg {
+        width : 90%;
+        height : 90%;
+    }
+}

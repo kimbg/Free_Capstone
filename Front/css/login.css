@@ -1,195 +1,196 @@
-        * {
-            text-decoration: none;
-        }
+* { 
+    text-decoration: none;
+    border : 0;
+    margin: 0;
+    outline : none;
+    color: black;
+}
 
-        html {
-            height: 100%;
-        }
+html, body {
+    background: rgb(224, 224, 224);
+    font-family:'나눔고딕';
+    font-size:10pt;
+}
 
-        body {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            background: rgb(224, 224, 224);
-        }
+body {
+    height: 100%;
+    width: 100vw;
 
-        .center {
-            text-align: center;
-        }
+    display: grid;
+    grid-template-areas: ". . ." ". content ." ". . .";
+    grid-template-columns: 1fr 340px 1fr;
+    grid-template-rows: 1fr 9fr 1fr;
 
-        .row {
-            flex-direction: row;
-            display: flex;
-        }
+    transition: 1s;
+}
 
-        #login {
-            z-index: 2;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            background: white;
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
-            border-radius: 5px;
+#login_window {
+    grid-area: content;
 
-            width: 400px;
-            height: 500px;
-            margin: -250px 0 0 -200px;
-            transition: 3s;
-        }
+    display: grid;
+    justify-content: stretch;
+    grid-template-areas: "." "logo" "form" "menu" "auth" ".";
+    grid-template-rows: 1fr 200px 120px 30px 120px 1fr;
+    row-gap: 10px;
 
-        #loginform {
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
-        }
+    border-radius: 10px;
+    background: white;
+    padding: 30px;
 
-        .photo {
-            margin-bottom: 10px;
-        }
+    animation: fadein 2s;
+    -moz-animation: fadein 2s;
+    /* Firefox */
+    -webkit-animation: fadein 2s;
+    /* Safari and Chrome */
+    -o-animation: fadein 2s;
+    /* Opera */
+}
 
-        #loginform>input {
-            width: 75%;
-            height: 35px;
-            margin: 0 auto;
-            margin-top: 5px;
-            background: rgb(233, 233, 233);
-            border: none;
-            border-radius: 3px;
-        }
+.logo {
+    grid-area: logo;
+    width: 40%;
+    margin: auto;
+}
 
-        #row_1 {
-            margin-top: 10px;
-            margin-bottom: 10px;
-        }
+.form {
+    grid-area: form;
+    display: grid;
+    justify-content: stretch;
+}
 
-        #row_1>input {
-            margin-left: 12.5%
-        }
+.inputbox {
+    margin-bottom: 5px;
+    background: rgb(233, 233, 233);
+    border: none;
+    padding-left: 5px;
+    border-radius: 10px;
+}
 
-        #loginbt {
-            color: white;
-            background: rgb(250, 122, 128);
-            width: 75%;
-            height: 35px;
-            margin: 0 auto;
-            border: none;
-            border-radius: 3px;
-            margin-bottom: 5px;
-        }
+.inputbtn {
+    cursor: pointer;
+    color: white;
+    background: rgb(250, 122, 129);
+    border: none;
+    border-radius: 10px;
+    text-align: center;
+}
 
-        #row_2 {
-            justify-content: space-around;
-            width: 75%;
-            margin-left: 12.5%
-        }
+#url_row {
+    grid-area: menu;
+    text-align: center;
+}
 
-        #row_2 a {
-            color: black;
-        }
+#loginToAuth {
+    grid-area: auth;
+    text-align: center;
+}
 
+/*회원가입*/
 
-        #join_window {
-            position: absolute;
-            z-index: 0;
-            width: 400px;
-            height: 500px;
-            opacity: 0;
+#join_window {
+    grid-area: content;
 
+    display: none;
+    justify-content: stretch;
+    grid-template-areas: "." "logo" "form" "return" ".";
+    grid-template-rows: 1fr 200px 450px 50px 1fr;
+    row-gap: 10px;
 
-            top: 50%;
-            left: 50%;
-            margin: -250px 0 0 -200px;
-            background: white;
+    border-radius: 10px;
+    background: white;
+    padding: 30px;
 
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
-            text-align: center;
+    animation: fadein 2s;
+    -moz-animation: fadein 2s;
+    /* Firefox */
+    -webkit-animation: fadein 2s;
+    /* Safari and Chrome */
+    -o-animation: fadein 2s;
+    /* Opera */
+}
 
-            transition: 3s;
-        }
-        #joinform {
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
-            text-align: center;
+#join_form {
+    grid-area: form;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr 40px 140px 40px 1fr;
+    justify-content: stretch;
+}
 
-        }
-        #joinform > input {
-            width: 75%;
-            height: 35px;
-            margin: 0 auto;
-            margin-top: 5px;
-            background: rgb(233, 233, 233);
-            border: none;
-            border-radius: 3px;
-        }
-        #yak {
-            font-size : 1.3em;
-            font-weight: bold;
-        }
-        #joinform > textarea {
-            width: 75%;            
-            margin: 0 auto;
-            margin-top: 5px;
-            background: rgb(233, 233, 233);
-            border: none;
-            border-radius: 3px;
-        }
-        #joinform > div.row {
-            margin-left: 12.5%;
-        }
-        #memberjoinbtn {
-            color: white;
-            background: rgb(250, 122, 128);
-            width: 75%;
-            height: 35px;
-            margin: 0 auto;
-            border: none;
-            border-radius: 3px;
-            margin-bottom: 5px;
-        }
+#area {
+    background: rgb(224, 224, 224);
+    width: 100%;
+    border-radius: 10px;
+    font-family:'나눔고딕';
+    font-size:10pt;
+    resize: none;
+}
 
-        #find_id_window {
-            z-index: 0;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            background: white;
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
-            border-radius: 5px;
-            
-            opacity : 0;
+span {
+    position: relative;
+    top: 5px;
+}
 
-            width: 400px;
-            height: 500px;
-            margin: -250px 0 0 -200px;
-            transition: 3s;
-        }
-        #find_pw_window {
-            z-index: 0;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            background: white;
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
-            border-radius: 5px;
+input[type="checkbox"] {
+    display: none;
+}
 
-            opacity : 0;
+input[type="checkbox"] + label span {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    background-image: url('/static/image/checkbox_round_unchecked.png');
+}
 
-            width: 400px;
-            height: 500px;
-            margin: -250px 0 0 -200px;
-            transition: 3s;
-        }
-        .close {
-            position:absolute;
-            top : 0;
-            right : 0;
-        }
+input[type="checkbox"]:checked + label span {
+    background-image: url('/static/image/checkbox_round_checked.png');
+}
+
+#return_bnt {
+    grid-area: return;
+}
+
+@media screen and (max-width: 600px) {      /*넓이가 (900px 보다)좁으면*/
+    body {
+        background: white;
+    }
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes fadein {
+    /* Firefox */
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadein {
+    /* Safari and Chrome */
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@-o-keyframes fadein {
+    /* Opera */
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
