@@ -4,6 +4,7 @@ const mysql = require('../src/ggot_mysql')._mysql      //mysql
 
 //로그아웃
 router.get('/', (req, res)=> {
+    console.log('req.session : ',req.session);
     res.sendFile('/kakao-Map.html', {root : `Front/html`})
 })
 
@@ -17,8 +18,13 @@ router.post('/getMarkers',(req,res)=> {
                 console.log("err2");
             }
 
+            let sendMessage = {
+                DBdata : result,
+                user : req.session.passport
+            }
+            
             conn.release();
-            res.send(result);
+            res.send(sendMessage);
         })
     })
 })
