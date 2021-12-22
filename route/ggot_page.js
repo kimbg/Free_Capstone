@@ -142,4 +142,29 @@ router.get('/profile', (req, res) => {
     res.sendFile('/profile_edit.html', {root : `Front/html`})
 })
 
+
+const multer = require('multer');
+const storage2 = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, './profile');
+    },
+    filename: (req, file, cb) => {
+        cb(null, "" + req.session.passport.user.id + ".jpg");    //강제 jpg 형변환 추후 고려
+    }
+})
+const upload2 = multer({storage : storage2});
+
+
+router.post('/profile_change', upload2.single('myfile'), (req, res) => {
+
+    const sql = 'UPDATE user SET password = ?, name = ? WHERE id = ?;'
+    
+    mysql.query(sql, [req.body.password, req.body.username, req.session.passport.user.id], (err, results) => {
+        if(err)
+            console.log(err)
+        else
+            res.redirect('/')
+    })
+})
+
 module.exports = router

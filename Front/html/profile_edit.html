@@ -5,35 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
     <script src = "/static/jquery/jquery-3.6.0.min.js"></script>
-    <!--css파일 불러오기-->
     <link rel="stylesheet" href="/static/css/profile_edit.css">
+    <script defer src = "/static/script/profile_edit.js"></script>
 </head>
 <body>
     <div id = "div">
         <div id = "profile_div">
             <div id ="profile_box">
-                <img id = "profile_picture" src="/resource/profile_taehee.png">
+                <img id = "profile_picture">
             </div>
             <a href="#" id="change_picture">프로필 사진 변경</a>
         </div>
-        <div id="username_div">
-            <h4>사용자 이름</h4>
-            <input type="text" name="" id="" placeholder="사용자 이름">
-        </div>
-        <div id="password_div">
-            <h4>비밀번호</h4>
-            <input type="password" name="" id="" placeholder="비밀번호">
-        </div>
-        <div id="birth_div">
-            <h4>생년월일</h4>
-            <input type="text" name="" id="" placeholder="생년월일(YY/MM/DD)">
-        </div>
-        <div id = "delete_account_div">
-            <a href="#" id="delete">회원 탈퇴</a>
-        </div>
-        <div id="button_div">
-            <button type="submit" id="summitbnt" onclick="btn();">완료</button>
-            <button type="submit" id="canclebnt" onclick="btn();">취소</button>
-        </div>
+        <form action="/page/profile_change" method="POST" enctype="multipart/form-data">
+            <input type = "file" name = "myfile" id = "fileselector" >
+            <div id="username_div">
+                <h4>사용자 이름</h4>
+                <input type="text" name="username" id="profile_username" placeholder="사용자 이름">
+            </div>
+            <div id="password_div">
+                <h4>비밀번호</h4>
+                <input type="password" name="password" id="profile_password" placeholder="비밀번호">
+            </div>
+            <div id="birth_div">
+                <h4>생년월일</h4>
+                <input type="text" name="birth" id="profile_birth" placeholder="생년월일(YY/MM/DD)">
+            </div>
+            <div id = "delete_account_div">
+                <a href="#" id="delete">회원 탈퇴</a>
+            </div>
+            <div id="button_div">
+                <button type="submit" id="summitbnt">완료</button>
+            </div>
+        </form>
+        <button id="canclebnt">취소</button>
     </div>
 </body>

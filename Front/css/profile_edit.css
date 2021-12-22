@@ -76,3 +76,7 @@ input {
     border-radius: 3px;
     margin-bottom: 5px;
 }
+
+#fileselector {
+    display: none;
+}
